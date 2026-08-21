@@ -54,18 +54,24 @@ test("built public HTML passes the same guard when a build is present", () => {
   }
 });
 
-test("production-safe build excludes research-only records and assets", () => {
+test("production build publishes representative media but excludes research-only records", () => {
   const serverApp = join(root, ".next/server/app");
   if (!existsSync(serverApp)) return;
   const html = filesUnder(serverApp, /\.html$/).map((file) => readFileSync(file, "utf8")).join("\n");
   for (const previewOnly of [
-    "/research-preview/",
     "Pınarbaşı Mah.",
     "KS.06.010",
     "+90 312 399 34 52",
     "Kayalık Üçpınar Doğal Kaynak Suları",
   ]) {
     assert.equal(html.includes(previewOnly), false, `research-only value leaked into production build: ${previewOnly}`);
+  }
+  for (const publicMedia of [
+    "/research-preview/production/water-pour.jpg",
+    "/research-preview/production/bottling-fill-line.jpg",
+    "/research-preview/product/generic-water-jug.jpg",
+  ]) {
+    assert.equal(html.includes(publicMedia), true, `representative production media missing: ${publicMedia}`);
   }
 });
 
@@ -90,13 +96,15 @@ test("research package and selected preview assets remain traceable", () => {
   }
 });
 
-test("research visibility remains explicitly gated", () => {
+test("research records remain gated while representative media stays public", () => {
   const contentSource = readFileSync(join(root, "src/content/site-content.ts"), "utf8");
   const layoutSource = readFileSync(join(root, "src/app/layout.tsx"), "utf8");
   assert.match(contentSource, /process\.env\.VERCEL_ENV/);
   assert.match(contentSource, /researchPreviewEnabled \? previewDealers : siteContent\.dealers/);
   assert.match(contentSource, /researchPreviewEnabled \? previewContact : siteContent\.contact/);
-  assert.match(contentSource, /researchPreviewEnabled \? previewMedia : siteContent\.media/);
+  assert.match(contentSource, /media: siteContent\.media/);
+  assert.match(contentSource, /researchPreviewEnabled \? researchHeritage : \[\]/);
+  assert.match(contentSource, /researchPreviewEnabled \? previewArchive/);
   assert.match(layoutSource, /index: false, follow: false, noarchive: true/);
 });
 

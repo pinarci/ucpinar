@@ -77,20 +77,11 @@ export const researchPreviewEnabled = resolveResearchPreview({
 export const researchDebugEnabled = researchPreviewEnabled && process.env.NEXT_PUBLIC_SHOW_RESEARCH_DEBUG === "true";
 
 const productionMedia: Record<MediaKey, MediaItem> = {
-  hero: { src: null, alt: "", ratio: "hero" },
-  facility: { src: null, alt: "", ratio: "landscape" },
-  production: { src: null, alt: "", ratio: "portrait" },
-  product: { src: null, alt: "", ratio: "portrait" },
-  logistics: { src: null, alt: "", ratio: "wide" },
-};
-
-const previewMedia: Record<MediaKey, MediaItem> = {
   hero: {
     src: "/research-preview/production/water-pour.jpg",
     alt: "Bardağa dökülen suyun siyah beyaz görünümü",
     ratio: "hero",
     objectPosition: "50% 48%",
-    previewOnly: true,
     representsCompanyFacility: false,
   },
   facility: {
@@ -99,7 +90,6 @@ const previewMedia: Record<MediaKey, MediaItem> = {
     caption: "Temsili üretim görünümü",
     ratio: "landscape",
     objectPosition: "52% 50%",
-    previewOnly: true,
     representsCompanyFacility: false,
   },
   production: {
@@ -108,7 +98,6 @@ const previewMedia: Record<MediaKey, MediaItem> = {
     caption: "Temsili üretim görünümü",
     ratio: "portrait",
     objectPosition: "57% 50%",
-    previewOnly: true,
     representsCompanyFacility: false,
   },
   product: {
@@ -117,7 +106,6 @@ const previewMedia: Record<MediaKey, MediaItem> = {
     caption: "Temsili damacana görünümü",
     ratio: "portrait",
     objectPosition: "50% 56%",
-    previewOnly: true,
     representsCompanyFacility: false,
   },
   logistics: { src: null, alt: "", ratio: "wide" },
@@ -266,7 +254,7 @@ export const publicContent = {
   ...siteContent,
   dealers: researchPreviewEnabled ? previewDealers : siteContent.dealers,
   contact: researchPreviewEnabled ? previewContact : siteContent.contact,
-  media: researchPreviewEnabled ? previewMedia : siteContent.media,
+  media: siteContent.media,
   heritage: [
     {
       year: "1944",
