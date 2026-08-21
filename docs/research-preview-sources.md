@@ -25,6 +25,8 @@ Bu kayıt, local research preview içinde kullanılan aday içeriklerin producti
 | Temsili su görseli | `water-pour.jpg` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Glass_of_Water.JPG) | Generic public-domain image | Hero | Evet | Preview-only | Onaylı marka fotoğrafıyla değiştir |
 | Temsili damacana | `generic-water-jug.jpg` | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Refilling_18L_water_jug_bottled_water_5219.JPG) | Generic 18 L public-domain image | Ürün bölümü | Evet | Preview-only; not Üçpınar product | Gerçek 19 L Üçpınar ürün fotoğrafıyla değiştir |
 | Logo referansı | `logo-user-reference.jpg` | Kullanıcı tarafından sağlandı | Low-resolution reference | Runtime’da kullanılmıyor | Evet | Reference only | Yüksek çözünürlüklü onaylı logo temin et |
+| Gazete arşiv kesitleri | Ulus (26 Mayıs 1950, 11 Aralık 1952) ve Zafer (26 Mayıs 1950, 27 Aralık 1953) | Kullanıcı tarafından sağlanan Gaste Arşivi görüntüleri | Newspaper archive | Ana sayfa, Basında Üçpınar | Hayır | User-provided archive media | Yayın öncesi kullanım hakkını marka sahibiyle teyit et |
+| Şehrin Nabzı videosu | Üçpınar Doğal Kaynak Suyu — Show Max | Kullanıcı tarafından sağlandı | Broadcast archive video | Ana sayfa, Video arşivi | Hayır | User-provided archive media | Yayın hakkını marka sahibiyle teyit et |
 
 ## Mode rules
 

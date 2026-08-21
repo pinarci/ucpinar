@@ -71,6 +71,15 @@ export interface ArchiveItem {
   verificationStatus: "previewOnly";
 }
 
+export interface PressArchiveItem {
+  publication: "Ulus" | "Zafer";
+  date: string;
+  page: number;
+  src: string;
+  alt: string;
+  sourceUrl: string;
+}
+
 type MediaKey = "hero" | "facility" | "production" | "product" | "logistics";
 
 export const researchPreviewEnabled = resolveResearchPreview({
@@ -240,6 +249,41 @@ const previewArchive: ArchiveItem[] = [
   },
 ];
 
+const pressArchive: PressArchiveItem[] = [
+  {
+    publication: "Ulus",
+    date: "26 Mayıs 1950",
+    page: 8,
+    src: "/archive/newspapers/ulus-1950-05-26-page-8.png",
+    alt: "Ulus gazetesinin 26 Mayıs 1950 tarihli 8. sayfasındaki Üçpınar Memba Suyu ilanı",
+    sourceUrl: "https://www.gastearsivi.com/gazete/ulus/1950-05-26/8",
+  },
+  {
+    publication: "Zafer",
+    date: "26 Mayıs 1950",
+    page: 4,
+    src: "/archive/newspapers/zafer-1950-05-26-page-4.png",
+    alt: "Zafer gazetesinin 26 Mayıs 1950 tarihli 4. sayfasındaki Üçpınar Memba Suyu ilanı",
+    sourceUrl: "https://www.gastearsivi.com/gazete/zafer/1950-05-26/4",
+  },
+  {
+    publication: "Ulus",
+    date: "11 Aralık 1952",
+    page: 1,
+    src: "/archive/newspapers/ulus-1952-12-11-page-1.png",
+    alt: "Ulus gazetesinin 11 Aralık 1952 tarihli 1. sayfasındaki Üçpınar Memba Suyu ilanı",
+    sourceUrl: "https://www.gastearsivi.com/gazete/ulus/1952-12-11/1",
+  },
+  {
+    publication: "Zafer",
+    date: "27 Aralık 1953",
+    page: 6,
+    src: "/archive/newspapers/zafer-1953-12-27-page-6.png",
+    alt: "Zafer gazetesinin 27 Aralık 1953 tarihli 6. sayfasındaki Üçpınar bayi ilanı",
+    sourceUrl: "https://www.gastearsivi.com/gazete/zafer/1953-12-27/6",
+  },
+];
+
 export const siteContent = {
   company: {
     name: "Üçpınar Kaynak Suyu",
@@ -272,6 +316,7 @@ export const publicContent = {
     ...(expandedContentEnabled ? researchHeritage : []),
   ],
   archive: expandedContentEnabled ? previewArchive : ([] as ArchiveItem[]),
+  pressArchive,
 };
 
 export function getMapSearchUrl(address: string, coordinates?: ContactData["coordinates"]) {

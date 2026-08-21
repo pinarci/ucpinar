@@ -127,6 +127,29 @@ test("licensed hero backgrounds and their source record remain available", () =>
   assert.match(sources, /unsplash\.com\/license/);
 });
 
+test("owner-provided newspaper and video archive is integrated without cropping newspaper text", () => {
+  const homeSource = readFileSync(join(root, "src/app/page.tsx"), "utf8");
+  const styles = readFileSync(join(root, "src/app/globals.css"), "utf8");
+  const contentSource = readFileSync(join(root, "src/content/site-content.ts"), "utf8");
+
+  for (const asset of [
+    "archive/newspapers/ulus-1950-05-26-page-8.png",
+    "archive/newspapers/zafer-1950-05-26-page-4.png",
+    "archive/newspapers/ulus-1952-12-11-page-1.png",
+    "archive/newspapers/zafer-1953-12-27-page-6.png",
+    "archive/video/ucpinar-sehrin-nabzi.mp4",
+    "archive/video/ucpinar-sehrin-nabzi-poster.jpg",
+  ]) {
+    assert.equal(existsSync(join(root, "public", asset)), true, `missing owner-provided archive asset: ${asset}`);
+  }
+
+  for (const label of ["26 Mayıs 1950", "11 Aralık 1952", "27 Aralık 1953", "Şehrin Nabzı"]) {
+    assert.equal((contentSource + homeSource).includes(label), true, `archive label missing: ${label}`);
+  }
+  assert.match(styles, /\.press-card__image img \{ object-fit: contain; \}/);
+  assert.match(homeSource, /<video controls preload="metadata" playsInline/);
+});
+
 test("temporary presentation mode expands review content and blocks indexing", () => {
   const contentSource = readFileSync(join(root, "src/content/site-content.ts"), "utf8");
   const layoutSource = readFileSync(join(root, "src/app/layout.tsx"), "utf8");

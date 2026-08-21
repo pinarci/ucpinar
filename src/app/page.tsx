@@ -80,6 +80,44 @@ export default function HomePage() {
               </div>
             </div>
           ) : null}
+
+          <div className="press-archive" aria-labelledby="press-archive-title">
+            <div className="press-archive__intro">
+              <div>
+                <p className="eyebrow">Basında Üçpınar</p>
+                <h3 id="press-archive-title">Gazete arşivinden ilanlar</h3>
+              </div>
+              <p>1950–1953 yılları arasında Ulus ve Zafer gazetelerinde yayımlanan Üçpınar ilanlarından arşiv kesitleri.</p>
+            </div>
+
+            <div className="press-archive__grid">
+              {publicContent.pressArchive.map((item) => (
+                <figure className="press-card" key={item.src}>
+                  <a className="press-card__image" href={item.src} target="_blank" rel="noopener noreferrer" aria-label={`${item.publication}, ${item.date}, sayfa ${item.page} görselini tam boy aç`}>
+                    <Image src={item.src} alt={item.alt} fill sizes="(max-width: 640px) 100vw, (max-width: 920px) 50vw, 38vw" />
+                  </a>
+                  <figcaption>
+                    <span className="press-card__publication">{item.publication}</span>
+                    <span>{item.date} · Sayfa {item.page}</span>
+                    <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">Kaynak kaydı <span aria-hidden="true">↗</span></a>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <article className="archive-video">
+              <div className="archive-video__copy">
+                <p className="eyebrow eyebrow--light">Video arşivi</p>
+                <h3>Şehrin Nabzı&apos;nda Üçpınar</h3>
+                <p>Üçpınar Doğal Kaynak Suyu&apos;nun üretim alanından Show Max Şehrin Nabzı programına yansıyan arşiv görüntüsü.</p>
+                <span>Video süresi · 03:17</span>
+              </div>
+              <video controls preload="metadata" playsInline poster="/archive/video/ucpinar-sehrin-nabzi-poster.jpg" aria-label="Şehrin Nabzı programındaki Üçpınar Doğal Kaynak Suyu videosu">
+                <source src="/archive/video/ucpinar-sehrin-nabzi.mp4" type="video/mp4" />
+                Tarayıcınız video oynatmayı desteklemiyor.
+              </video>
+            </article>
+          </div>
         </Container>
       </section>
 

@@ -123,6 +123,24 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .archive-gallery figure:last-child .archive-gallery__image { aspect-ratio: 4 / 5; }
 .archive-gallery img { object-fit: cover; }
 .archive-gallery figcaption { padding-top: 0.7rem; color: var(--text-secondary); font-size: 0.78rem; }
+.press-archive { margin-top: clamp(3.5rem, 7vw, 6rem); padding-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--line-soft); }
+.press-archive__intro { margin-bottom: 2rem; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 0.55fr); align-items: end; gap: 2rem; }
+.press-archive__intro h3 { margin: 0; color: var(--brand-navy); font-size: clamp(1.9rem, 3.5vw, 3.15rem); letter-spacing: -0.045em; line-height: 1; }
+.press-archive__intro > p { max-width: 31rem; margin: 0; color: var(--text-secondary); }
+.press-archive__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
+.press-card { margin: 0; min-width: 0; }
+.press-card__image { position: relative; aspect-ratio: 1.54 / 1; display: block; overflow: hidden; border: 1px solid #d7d1c5; background: #e8e3d7; box-shadow: 0 1.1rem 2.5rem rgba(11,31,58,0.08); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+.press-card__image:hover { transform: translateY(-0.2rem); box-shadow: 0 1.4rem 3rem rgba(11,31,58,0.13); }
+.press-card__image img { object-fit: contain; }
+.press-card figcaption { padding-top: 0.9rem; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 0.75rem; color: var(--text-secondary); font-size: 0.78rem; }
+.press-card__publication { color: var(--brand-navy); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.press-card figcaption a { color: var(--brand-water); font-weight: 750; white-space: nowrap; }
+.archive-video { margin-top: clamp(2.5rem, 5vw, 4.5rem); display: grid; grid-template-columns: minmax(17rem, 0.42fr) minmax(0, 1fr); overflow: hidden; background: var(--brand-navy); color: #fff; box-shadow: var(--shadow-panel); }
+.archive-video__copy { padding: clamp(1.75rem, 4vw, 3.5rem); display: flex; flex-direction: column; justify-content: center; }
+.archive-video__copy h3 { margin-bottom: 1rem; color: #fff; font-size: clamp(1.8rem, 3.2vw, 3rem); letter-spacing: -0.045em; line-height: 1; }
+.archive-video__copy > p:not(.eyebrow) { color: var(--brand-ice); }
+.archive-video__copy > span { color: var(--brand-steel); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.archive-video video { width: 100%; height: 100%; min-height: 24rem; display: block; object-fit: contain; background: #000; }
 .split-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.7fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
 .split-grid--reverse { grid-template-columns: minmax(19rem, 0.7fr) minmax(0, 1.15fr); }
 .split-copy .text-link { margin-top: 1rem; }
@@ -247,6 +265,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   .split-grid, .split-grid--reverse, .document-feature { grid-template-columns: 1fr; }
   .split-grid--reverse .split-copy { order: -1; }
   .corporate-panel { grid-template-columns: 1fr; }
+  .archive-video { grid-template-columns: 1fr; }
+  .archive-video video { min-height: auto; aspect-ratio: 16 / 9; }
   .contact-summary { grid-template-columns: 1fr; }
   .brand-pillars__grid { grid-template-columns: 1fr; }
   .brand-pillars__grid li, .brand-pillars__grid li:last-child { min-height: auto; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
@@ -277,6 +297,9 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   .archive-block__heading .eyebrow { margin-bottom: 0.7rem; }
   .archive-gallery { grid-template-columns: 1fr; }
   .archive-gallery figure:last-child .archive-gallery__image { aspect-ratio: 16 / 10; }
+  .press-archive__intro, .press-archive__grid { grid-template-columns: 1fr; }
+  .press-card figcaption { grid-template-columns: auto 1fr; }
+  .press-card figcaption a { grid-column: 1 / -1; }
   .dealer-toolbar, .dealer-result { grid-template-columns: 1fr; gap: 1rem; }
   .dealer-result__actions { justify-items: start; }
   .record-list li { grid-template-columns: 1fr; gap: 0.5rem; }
