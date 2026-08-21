@@ -22,12 +22,23 @@ export default function HomePage() {
             <p className="eyebrow eyebrow--light">1944&apos;ten beri</p>
             <h1 id="hero-title">ÜÇPINAR</h1>
             <p className="home-hero__descriptor">Kaynak Suyu</p>
+            <p className="home-hero__lede">Günlük yaşamın en temel ihtiyacına köklü, sade ve güven veren bir yaklaşım.</p>
             <div className="action-row">
               <TextLink href="/bayiler" variant="primary">Bayi Bul</TextLink>
               <TextLink href="/kalite-ve-analizler" variant="secondary">Analizler &amp; Belgeler</TextLink>
             </div>
           </div>
           <MediaSlot media={publicContent.media.hero} priority />
+        </Container>
+      </section>
+
+      <section className="brand-pillars" aria-label="Üçpınar marka yaklaşımı">
+        <Container>
+          <ul className="brand-pillars__grid">
+            <li><span>01</span><div><h2>Köklü marka</h2><p>1944&apos;ten bugüne uzanan bir isim ve Ankara&apos;yla kurulan güçlü bağ.</p></div></li>
+            <li><span>02</span><div><h2>Sade yaklaşım</h2><p>Ürünü, süreci ve hizmeti gereksiz kalabalıktan uzak anlatan net bir duruş.</p></div></li>
+            <li><span>03</span><div><h2>Yakın hizmet</h2><p>19 L damacana odağı ve bayi ağıyla gündelik ihtiyaca doğrudan erişim.</p></div></li>
+          </ul>
         </Container>
       </section>
 
@@ -89,6 +100,11 @@ export default function HomePage() {
             <p className="eyebrow">Ana ürün</p>
             <h2 id="product-title">{siteContent.product.name}</h2>
             <p>{siteContent.product.description}</p>
+            <ul className="product-notes" aria-label="Ürün sunumu">
+              <li><strong>19 L</strong><span>Ana ürün formatı</span></li>
+              <li><strong>Ev & iş yeri</strong><span>Günlük kullanım odağı</span></li>
+              <li><strong>Bayi ağı</strong><span>Bölgesel teslimat yapısı</span></li>
+            </ul>
             <TextLink href="/bayiler" variant="outline">Bayi Bul</TextLink>
           </div>
         </Container>

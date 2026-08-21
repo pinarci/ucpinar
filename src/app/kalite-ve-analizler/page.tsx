@@ -11,6 +11,20 @@ export default function QualityPage() {
   return (
     <>
       <PageIntro eyebrow="Belgeler" title="Kalite & Analizler" description="Su analizleri ile tarihsel marka kayıtları, kaynak türleri birbirine karıştırılmadan sunulur." />
+      <section className="section quality-approach" aria-labelledby="quality-approach-title">
+        <Container>
+          <div className="section-heading">
+            <p className="eyebrow">Kalite yaklaşımı</p>
+            <h2 id="quality-approach-title">Her aşamada aynı özen.</h2>
+            <p className="section-heading__description">Kaynak suyunun tüketiciye ulaşan yolculuğu; üretim, kontrol ve şeffaf bilgilendirme başlıklarıyla ele alınır.</p>
+          </div>
+          <ol className="process-grid">
+            <li><span>01</span><h3>Kaynak & üretim</h3><p>Suyun karakterini korumayı merkezine alan, düzenli ve kontrollü bir üretim yaklaşımı.</p></li>
+            <li><span>02</span><h3>Kontrol & dolum</h3><p>Dolum sürecinin hijyen, düzen ve ürün bütünlüğü odağında ele alınması.</p></li>
+            <li><span>03</span><h3>Belge & şeffaflık</h3><p>Analiz ve belge içeriklerinin anlaşılır, erişilebilir ve güncel bir yapıda sunulması.</p></li>
+          </ol>
+        </Container>
+      </section>
       <section className="section section--paper" aria-labelledby="analysis-title">
         <Container className="page-grid">
           <div className="sticky-title"><p className="eyebrow">Su analizleri</p><h2 id="analysis-title">Güncel analiz belgeleri</h2></div>

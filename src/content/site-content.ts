@@ -78,6 +78,9 @@ export const researchPreviewEnabled = resolveResearchPreview({
   vercelEnv: process.env.VERCEL_ENV,
   flag: process.env.NEXT_PUBLIC_RESEARCH_PREVIEW,
 });
+// Temporary owner-review mode. Set to false when the approved production content is ready.
+export const presentationModeEnabled = true;
+export const expandedContentEnabled = presentationModeEnabled || researchPreviewEnabled;
 export const researchDebugEnabled = researchPreviewEnabled && process.env.NEXT_PUBLIC_SHOW_RESEARCH_DEBUG === "true";
 
 const productionMedia: Record<MediaKey, MediaItem> = {
@@ -256,8 +259,8 @@ export const siteContent = {
 
 export const publicContent = {
   ...siteContent,
-  dealers: researchPreviewEnabled ? previewDealers : siteContent.dealers,
-  contact: researchPreviewEnabled ? previewContact : siteContent.contact,
+  dealers: expandedContentEnabled ? previewDealers : siteContent.dealers,
+  contact: expandedContentEnabled ? previewContact : siteContent.contact,
   media: siteContent.media,
   heritage: [
     {
@@ -266,9 +269,9 @@ export const publicContent = {
       description: "Üçpınar'ın marka geçmişinin başlangıç yılı.",
       verificationStatus: "provided",
     } satisfies HistoricalRecord,
-    ...(researchPreviewEnabled ? researchHeritage : []),
+    ...(expandedContentEnabled ? researchHeritage : []),
   ],
-  archive: researchPreviewEnabled ? previewArchive : ([] as ArchiveItem[]),
+  archive: expandedContentEnabled ? previewArchive : ([] as ArchiveItem[]),
 };
 
 export function getMapSearchUrl(address: string, coordinates?: ContactData["coordinates"]) {

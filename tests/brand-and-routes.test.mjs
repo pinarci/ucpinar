@@ -57,17 +57,16 @@ test("built public HTML passes the same guard when a build is present", () => {
   }
 });
 
-test("production build publishes representative media but excludes research-only records", () => {
+test("presentation build publishes representative media and review content", () => {
   const serverApp = join(root, ".next/server/app");
   if (!existsSync(serverApp)) return;
   const html = filesUnder(serverApp, /\.html$/).map((file) => readFileSync(file, "utf8")).join("\n");
-  for (const previewOnly of [
+  for (const presentationValue of [
     "Pınarbaşı Mah.",
     "KS.06.010",
     "+90 312 399 34 52",
-    "Kayalık Üçpınar Doğal Kaynak Suları",
   ]) {
-    assert.equal(html.includes(previewOnly), false, `research-only value leaked into production build: ${previewOnly}`);
+    assert.equal(html.includes(presentationValue), true, `presentation value missing from review build: ${presentationValue}`);
   }
   for (const publicMedia of [
     "/research-preview/production/water-pour.jpg",
@@ -99,15 +98,17 @@ test("research package and selected preview assets remain traceable", () => {
   }
 });
 
-test("research records remain gated while representative media stays public", () => {
+test("temporary presentation mode expands review content and blocks indexing", () => {
   const contentSource = readFileSync(join(root, "src/content/site-content.ts"), "utf8");
   const layoutSource = readFileSync(join(root, "src/app/layout.tsx"), "utf8");
   assert.match(contentSource, /process\.env\.VERCEL_ENV/);
-  assert.match(contentSource, /researchPreviewEnabled \? previewDealers : siteContent\.dealers/);
-  assert.match(contentSource, /researchPreviewEnabled \? previewContact : siteContent\.contact/);
+  assert.match(contentSource, /presentationModeEnabled = true/);
+  assert.match(contentSource, /presentationModeEnabled \|\| researchPreviewEnabled/);
+  assert.match(contentSource, /expandedContentEnabled \? previewDealers : siteContent\.dealers/);
+  assert.match(contentSource, /expandedContentEnabled \? previewContact : siteContent\.contact/);
   assert.match(contentSource, /media: siteContent\.media/);
-  assert.match(contentSource, /researchPreviewEnabled \? researchHeritage : \[\]/);
-  assert.match(contentSource, /researchPreviewEnabled \? previewArchive/);
+  assert.match(contentSource, /expandedContentEnabled \? researchHeritage : \[\]/);
+  assert.match(contentSource, /expandedContentEnabled \? previewArchive/);
   assert.match(layoutSource, /index: false, follow: false, noarchive: true/);
 });
 

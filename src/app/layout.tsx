@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
-import { researchPreviewEnabled, siteContent } from "@/content/site-content";
+import { expandedContentEnabled, siteContent } from "@/content/site-content";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({ subsets: ["latin"], variable: "--font-source-sans", display: "swap" });
@@ -11,7 +11,7 @@ const sourceSerif = Source_Serif_4({ subsets: ["latin"], variable: "--font-sourc
 export const metadata: Metadata = {
   title: { default: siteContent.company.name, template: `%s | ${siteContent.company.shortName}` },
   description: siteContent.company.description,
-  robots: researchPreviewEnabled ? { index: false, follow: false, noarchive: true } : undefined,
+  robots: expandedContentEnabled ? { index: false, follow: false, noarchive: true } : undefined,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
