@@ -54,11 +54,13 @@ test("owner-provided logo is integrated through the shared brand component", () 
 });
 
 test("owner-provided branded water jug is featured in the hero without cropping", () => {
-  assert.equal(existsSync(join(root, "public/product/ucpinar-19l-damacana.png")), true, "branded 19 L water jug is missing");
+  assert.equal(existsSync(join(root, "public/product/ucpinar-19l-damacana-nobackground.png")), true, "transparent branded 19 L water jug is missing");
   const contentSource = readFileSync(join(root, "src/content/site-content.ts"), "utf8");
   const styles = readFileSync(join(root, "src/app/globals.css"), "utf8");
-  assert.match(contentSource, /hero:[\s\S]*\/product\/ucpinar-19l-damacana\.png/);
-  assert.match(styles, /\.home-hero \.media-slot--hero img \{ object-fit: contain; \}/);
+  assert.match(contentSource, /hero:[\s\S]*\/product\/ucpinar-19l-damacana-nobackground\.png/);
+  assert.match(styles, /\.home-hero \.media-slot--hero \{ border-color: transparent; background: transparent; \}/);
+  assert.match(styles, /\.home-hero \.media-slot--hero::before \{ display: none; \}/);
+  assert.match(styles, /\.home-hero \.media-slot--hero img \{ object-fit: contain;/);
 });
 
 test("built public HTML passes the same guard when a build is present", () => {
@@ -96,7 +98,7 @@ test("presentation build publishes representative media and review content", () 
     assert.equal(html.includes(presentationValue), true, `presentation value missing from review build: ${presentationValue}`);
   }
   for (const publicMedia of [
-    "/product/ucpinar-19l-damacana.png",
+    "/product/ucpinar-19l-damacana-nobackground.png",
     "/research-preview/production/bottling-fill-line.jpg",
     "/research-preview/product/generic-water-jug.jpg",
   ]) {

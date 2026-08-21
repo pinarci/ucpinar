@@ -94,7 +94,7 @@ export const researchDebugEnabled = researchPreviewEnabled && process.env.NEXT_P
 
 const productionMedia: Record<MediaKey, MediaItem> = {
   hero: {
-    src: "/product/ucpinar-19l-damacana.png",
+    src: "/product/ucpinar-19l-damacana-nobackground.png",
     alt: "Üçpınar logolu 19 litre damacana",
     ratio: "hero",
     objectPosition: "50% 50%",
