@@ -45,6 +45,10 @@ export interface ContactData {
   phone: string | null;
   email: string | null;
   hours: string | null;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+  };
   sourceUrl?: string;
   sourceStatus: "verified" | "researchCandidate" | null;
 }
@@ -112,21 +116,21 @@ const productionMedia: Record<MediaKey, MediaItem> = {
 };
 
 const productionContact: ContactData = {
-  label: null,
-  address: null,
+  label: "Tesis konumu",
+  address: "Saray Köy Sk., Saray Fatih, 06146 Pursaklar/Ankara",
   phone: null,
   email: null,
   hours: null,
-  sourceStatus: null,
+  coordinates: {
+    latitude: 40.058061,
+    longitude: 32.913586,
+  },
+  sourceStatus: "verified",
 };
 
 const previewContact: ContactData = {
-  label: "Merkez / tesis kaydı",
-  address: "Tevfik İleri Mah., Esenboğa Yolu 16. Km, 06750 Sarayköy - Pursaklar, Ankara",
+  ...productionContact,
   phone: "+90 312 399 34 52",
-  email: null,
-  hours: null,
-  sourceUrl: "https://yandex.com.tr/maps/org/ucpinar_kaynak_suyu/228905201667/",
   sourceStatus: "researchCandidate",
 };
 
@@ -267,8 +271,9 @@ export const publicContent = {
   archive: researchPreviewEnabled ? previewArchive : ([] as ArchiveItem[]),
 };
 
-export function getMapSearchUrl(address: string) {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+export function getMapSearchUrl(address: string, coordinates?: ContactData["coordinates"]) {
+  const query = coordinates ? `${coordinates.latitude},${coordinates.longitude}` : address;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
 export const navigation: NavigationItem[] = [

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { DealerFinder } from "@/components/dealers/dealer-finder";
 import { Container } from "@/components/ui/container";
 import { MediaSlot } from "@/components/ui/media-slot";
+import { GoogleMapPreview } from "@/components/ui/google-map-preview";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TextLink } from "@/components/ui/text-link";
 import { getMapSearchUrl, publicContent, siteContent } from "@/content/site-content";
@@ -129,13 +130,16 @@ export default function HomePage() {
         <Container>
           <SectionHeading id="contact-title" eyebrow="Tesis & iletişim" title="Üçpınar'a ulaşın." description={contact.address ? "Merkez iletişim kaydına ve konum yönlendirmesine bu bölümden ulaşabilirsiniz." : "Kurumsal ve toplu sipariş talepleri için iletişim sayfasını kullanabilirsiniz."} />
           {contact.address || contact.phone ? (
-            <div className="contact-summary">
-              <div><p className="footer-label">{contact.label}</p><address>{contact.address}</address>{contact.phone ? <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>{contact.phone}</a> : null}</div>
-              <div className="action-row">
-                {contact.address ? <a className="text-link text-link--outline" href={getMapSearchUrl(contact.address)} target="_blank" rel="noopener noreferrer">Haritada Aç<span aria-hidden="true">↗</span></a> : null}
-                <TextLink href="/iletisim" variant="primary">İletişim Bilgileri</TextLink>
+            <>
+              <div className="contact-summary">
+                <div><p className="footer-label">{contact.label}</p><address>{contact.address}</address>{contact.phone ? <a href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>{contact.phone}</a> : null}</div>
+                <div className="action-row">
+                  {contact.address ? <a className="text-link text-link--outline" href={getMapSearchUrl(contact.address, contact.coordinates)} target="_blank" rel="noopener noreferrer">Haritada Aç<span aria-hidden="true">↗</span></a> : null}
+                  <TextLink href="/iletisim" variant="primary">İletişim Bilgileri</TextLink>
+                </div>
               </div>
-            </div>
+              {contact.coordinates ? <GoogleMapPreview latitude={contact.coordinates.latitude} longitude={contact.coordinates.longitude} title="Üçpınar tesis konumu" wide /> : null}
+            </>
           ) : <MediaSlot media={publicContent.media.logistics} />}
         </Container>
       </section>

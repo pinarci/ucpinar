@@ -44,6 +44,9 @@ test("built public HTML passes the same guard when a build is present", () => {
   assert.ok(htmlFiles.length >= 4, "expected prerendered HTML for the four public routes");
   const html = htmlFiles.map((file) => readFileSync(file, "utf8")).join("\n");
   for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1944", "19 L Damacana"]) assert.ok(html.includes(required), `missing public HTML term: ${required}`);
+  for (const locationTerm of ["Saray Köy Sk.", "Saray Fatih", "40.058061", "32.913586", "google.com/maps"]) {
+    assert.ok(html.includes(locationTerm), `missing verified location term: ${locationTerm}`);
+  }
   for (const forbidden of ["[GEREKLİ BİLGİ", "fake pH", "fake mineral", "fake laboratory", "fake certificate", "info@example.com"]) {
     assert.equal(html.toLowerCase().includes(forbidden.toLowerCase()), false, `unsafe public copy found: ${forbidden}`);
   }

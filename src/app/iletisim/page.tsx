@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
+import { GoogleMapPreview } from "@/components/ui/google-map-preview";
 import { MediaSlot } from "@/components/ui/media-slot";
 import { PageIntro } from "@/components/ui/page-intro";
 import { getMapSearchUrl, publicContent } from "@/content/site-content";
@@ -26,13 +27,15 @@ export default function ContactPage() {
       {contactRows.length > 0 ? (
         <section className="section section--paper">
           <Container className="split-grid">
-            <MediaSlot media={publicContent.media.facility} />
+            {contact.coordinates ? (
+              <GoogleMapPreview latitude={contact.coordinates.latitude} longitude={contact.coordinates.longitude} title="Üçpınar tesis konumu" />
+            ) : <MediaSlot media={publicContent.media.facility} />}
             <div className="split-copy">
               <p className="eyebrow">{contact.label ?? "İletişim"}</p>
               <h2>İletişim detayları</h2>
               <ul className="contact-list">{contactRows.map(([label, value]) => <li key={label}><strong>{label}</strong>{label === "Telefon" ? <a href={telephoneHref(value)}>{value}</a> : <span>{value}</span>}</li>)}</ul>
               <div className="action-row contact-actions">
-                {contact.address ? <a className="text-link text-link--outline" href={getMapSearchUrl(contact.address)} target="_blank" rel="noopener noreferrer">Haritada Aç<span aria-hidden="true">↗</span></a> : null}
+                {contact.address ? <a className="text-link text-link--outline" href={getMapSearchUrl(contact.address, contact.coordinates)} target="_blank" rel="noopener noreferrer">Haritada Aç<span aria-hidden="true">↗</span></a> : null}
                 {contact.sourceUrl ? <a className="text-link text-link--inline" href={contact.sourceUrl} target="_blank" rel="noopener noreferrer">Kaydı Gör<span aria-hidden="true">↗</span></a> : null}
               </div>
             </div>
