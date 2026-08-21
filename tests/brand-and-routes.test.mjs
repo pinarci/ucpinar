@@ -61,6 +61,8 @@ test("owner-provided branded water jug is featured in the hero without cropping"
   assert.match(styles, /\.home-hero \.media-slot--hero \{ border-color: transparent; background: transparent; \}/);
   assert.match(styles, /\.home-hero \.media-slot--hero::before \{ display: none; \}/);
   assert.match(styles, /\.home-hero \.media-slot--hero img \{ object-fit: contain;/);
+  assert.match(styles, /filter: brightness\(0\.9\)/);
+  assert.match(styles, /transform: scale\(0\.88\)/);
 });
 
 test("built public HTML passes the same guard when a build is present", () => {
