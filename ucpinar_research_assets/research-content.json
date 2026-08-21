@@ -1,0 +1,112 @@
+{
+  "purpose": "Local research-preview content pack for Üçpınar website. Not a production truth source.",
+  "userProvided": {
+    "publicBrandName": "Üçpınar Kaynak Suyu",
+    "foundingYear": 1944,
+    "primaryProduct": "19 L Damacana Su"
+  },
+  "researchBacked": {
+    "oldDomain": {
+      "value": "ucpinar.com.tr",
+      "status": "historical",
+      "note": "Third-party domain index shows the old site title as Üçpınar Doğal Kaynak Suyu and a 1944-based tagline; site was offline when checked in 2026.",
+      "source": "https://webrate.org/site/ucpinar.com.tr/"
+    },
+    "heritage1950": {
+      "value": "Üçpınar Memba Suyu was advertised in Ulus newspaper on 26 May 1950.",
+      "status": "source-backed",
+      "source": "https://www.gastearsivi.com/gazete/ulus/1950-05-26/8"
+    },
+    "dealerModel1953": {
+      "value": "A 27 December 1953 Zafer newspaper ad sought a dealer for Üçpınar Memba Suyu in Ankara.",
+      "status": "source-backed",
+      "source": "https://www.gastearsivi.com/gazete/zafer/1953-12-27/6"
+    },
+    "healthMinistry2001": {
+      "value": "A 23 January 2001 Health Ministry response listed Üçpınar Kaynak Suyu among Ankara-area licensed source waters.",
+      "status": "official-historical",
+      "source": "https://www5.tbmm.gov.tr/tutanaklar/TUTANAK/TBMM/d21/c053/tbmm21053047.pdf"
+    },
+    "historicalLicense2011": {
+      "value": {
+        "brand": "ÜÇPINAR",
+        "licenseNo": "KS.06.010",
+        "licenseDate": "2011-04-02",
+        "historicalCompanyName": "ÜÇPINAR KAYNAK SUYU GIDA İNŞ. TEK. TURZ. OTO SAN. TİC. LTD. ŞTİ.",
+        "historicalPhone": "0312 399 30 15"
+      },
+      "status": "historical-third-party-list",
+      "source": "https://damacanasuisi.blogspot.com/search/label/filiz"
+    },
+    "facilityCandidate": {
+      "name": "Üçpınar Kaynak Suyu",
+      "address": "Tevfik İleri Mah., Esenboğa Yolu 16. Km, 06750 Sarayköy - Pursaklar, Ankara",
+      "phone": "+90 312 399 34 52",
+      "status": "current-map-candidate",
+      "source": "https://yandex.com.tr/maps/org/ucpinar_kaynak_suyu/228905201667/"
+    },
+    "currentLegalEntityCandidate": {
+      "value": "Kayalık Üçpınar Doğal Kaynak Suları Limited Şirketi",
+      "status": "candidate-not-proven-brand-continuity",
+      "note": "Appears in recent Ankara procurement records, including 2026. Do not present as the official website footer entity until family/company confirms continuity.",
+      "source": "https://ihalebul.com/tenders/search/archived?page=39&province_in=Ankara&sort=contract.first"
+    }
+  },
+  "previewDealerCandidates": [
+    {
+      "id": "kecioren-pinarbasi",
+      "name": "Üçpınar Kaynak Suyu",
+      "district": "Keçiören",
+      "address": "Pınarbaşı Mah., Anız Sok., No:7, Keçiören, Ankara",
+      "phone": "+90 545 362 60 66",
+      "status": "web-research-candidate",
+      "source": "https://yandex.com.tr/maps/org/ucpinar_kaynak_suyu/1339153526/"
+    },
+    {
+      "id": "yenimahalle-demetgul",
+      "name": "Üçpınar Su Bayii",
+      "district": "Yenimahalle",
+      "address": "Demetgül Mahallesi, 422/1. Sk. No:41, Yenimahalle, Ankara",
+      "phone": "+90 312 335 55 54",
+      "status": "web-research-candidate",
+      "source": "https://www.turk5.com/firma/ucpinar-su-bayii/"
+    },
+    {
+      "id": "altindag-haskoy",
+      "name": "Üçpınar Doğal Kaynak Suyu Hasköy",
+      "district": "Altındağ",
+      "address": "Malazgirt Cad. No:7/D:4, Hasköy, Altındağ, Ankara",
+      "phone": "+90 312 347 17 73",
+      "workingHours": "08:30–20:00",
+      "status": "web-research-candidate",
+      "source": "https://enyakinnerde.com/su-firmalari/238776-ucpinar-dogal-kaynak-suyu-haskoy"
+    },
+    {
+      "id": "mamak-cengizhan",
+      "name": "Üçpınar Su",
+      "district": "Mamak",
+      "address": "Cengizhan Mah. 846. Cad. No:219, Mamak, Ankara",
+      "phone": "+90 312 390 87 52",
+      "status": "web-research-candidate",
+      "source": "https://yellowpages.com.tr/ucpinar-su-mamak-ankara"
+    },
+    {
+      "id": "altindag-zubeydehanim",
+      "name": "Üçpınar Doğal Kaynak Suyu",
+      "district": "Altındağ",
+      "address": "Zübeyde Hanım Mah., Turgut Özal Blv., 14A, Altındağ, Ankara",
+      "phone": "+90 312 399 30 15",
+      "status": "web-research-candidate",
+      "source": "https://yandex.com.tr/maps/org/ucpinar_dogal_kaynak_suyu/17763625024/"
+    }
+  ],
+  "doNotPublishAsFactWithoutConfirmation": [
+    "Current official legal company name",
+    "Current license number/status",
+    "Current laboratory analysis values",
+    "Exact source/memba ownership relationship",
+    "Current working hours of the central facility",
+    "Dealer list completeness",
+    "Any production-capacity claim"
+  ]
+}
