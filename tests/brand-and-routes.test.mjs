@@ -38,6 +38,21 @@ test("target route source files exist", () => {
   }
 });
 
+test("owner-provided logo is integrated through the shared brand component", () => {
+  assert.equal(existsSync(join(root, "public/brand/ucpinar-logo.png")), true, "optimized public logo is missing");
+  assert.equal(existsSync(join(root, "ucpinar_research_assets/brand/logo-owner-provided.png")), true, "original owner-provided logo is missing");
+  const logoComponent = readFileSync(join(root, "src/components/brand/brand-logo.tsx"), "utf8");
+  assert.match(logoComponent, /\/brand\/ucpinar-logo\.png/);
+  for (const consumer of [
+    "src/components/layout/header.tsx",
+    "src/components/layout/mobile-navigation.tsx",
+    "src/components/layout/footer.tsx",
+    "src/app/kalite-ve-analizler/page.tsx",
+  ]) {
+    assert.match(readFileSync(join(root, consumer), "utf8"), /BrandLogo/, `shared logo missing from ${consumer}`);
+  }
+});
+
 test("built public HTML passes the same guard when a build is present", () => {
   const serverApp = join(root, ".next/server/app");
   if (!existsSync(serverApp)) return;

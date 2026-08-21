@@ -11,6 +11,10 @@ const sourceSerif = Source_Serif_4({ subsets: ["latin"], variable: "--font-sourc
 export const metadata: Metadata = {
   title: { default: siteContent.company.name, template: `%s | ${siteContent.company.shortName}` },
   description: siteContent.company.description,
+  icons: {
+    icon: [{ url: "/brand/ucpinar-logo.png", type: "image/png" }],
+    apple: "/brand/ucpinar-logo.png",
+  },
   robots: expandedContentEnabled ? { index: false, follow: false, noarchive: true } : undefined,
 };
 

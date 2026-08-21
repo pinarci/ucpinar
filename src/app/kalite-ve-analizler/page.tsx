@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
 import { PageIntro } from "@/components/ui/page-intro";
 import { publicContent } from "@/content/site-content";
@@ -65,7 +66,7 @@ export default function QualityPage() {
             {reportDrafts.map((report) => (
               <article className="report-mockup" key={report.title}>
                 <div className="report-mockup__warning">Sunum taslağı · Gerçek analiz değildir</div>
-                <p className="report-mockup__brand">ÜÇPINAR · ANALİZ BELGESİ</p>
+                <div className="report-mockup__brand"><BrandLogo decorative /><span>Analiz Belgesi</span></div>
                 <h3>{report.title}</h3>
                 <p>{report.scope}</p>
                 <dl>

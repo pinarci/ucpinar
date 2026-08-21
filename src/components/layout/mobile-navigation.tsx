@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { headerAction, navigation, siteContent } from "@/content/site-content";
+import { BrandLogo } from "@/components/brand/brand-logo";
+import { headerAction, navigation } from "@/content/site-content";
 
 export function MobileNavigation({ activePath }: { activePath: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ export function MobileNavigation({ activePath }: { activePath: string }) {
         <div className="mobile-menu" id="mobile-site-navigation">
           <button className="mobile-menu__backdrop" type="button" aria-label="Menüyü kapat" onClick={() => closeMenu()} />
           <div className="mobile-menu__panel">
-            <p className="mobile-menu__wordmark" aria-hidden="true">{siteContent.company.shortName}</p>
+            <BrandLogo className="mobile-menu__logo" />
             <nav aria-label="Mobil menü"><ul>{navigation.map((item, index) => {
               const active = activePath === item.href;
               return <li key={item.href}><Link ref={index === 0 ? firstLinkRef : undefined} href={item.href} data-active={active || undefined} aria-current={active ? "page" : undefined} onClick={() => closeMenu()}><span>{String(index + 1).padStart(2, "0")}</span>{item.label}</Link></li>;

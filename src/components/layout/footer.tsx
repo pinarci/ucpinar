@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
 import { navigation, siteContent } from "@/content/site-content";
 
@@ -8,7 +9,7 @@ export function Footer() {
       <Container>
         <div className="site-footer__top">
           <div>
-            <p className="footer-wordmark">{siteContent.company.name}</p>
+            <Link className="footer-logo-link" href="/" aria-label={`${siteContent.company.name} ana sayfa`}><BrandLogo className="footer-logo" decorative /></Link>
             <p className="site-footer__slogan">1944&apos;ten beri. 19 L damacana ve bayi ağı odağında.</p>
           </div>
           <nav aria-label="Alt menü">
