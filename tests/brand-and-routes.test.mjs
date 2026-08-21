@@ -17,6 +17,7 @@ function filesUnder(directory, extensionPattern) {
 test("public source contains the Üçpınar foundation and no legacy identity", () => {
   const source = filesUnder(join(root, "src"), /\.(ts|tsx|css)$/).map((file) => readFileSync(file, "utf8")).join("\n");
   for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1944", "19 L Damacana"]) assert.match(source, new RegExp(required));
+  for (const heroAsset of ["/hero/dark-water-ripples.webp", "/hero/blue-water-ripples.webp"]) assert.match(source, new RegExp(heroAsset));
 
   const forbidden = [
     ["MS", "Partners"].join(" "),
@@ -46,6 +47,9 @@ test("built public HTML passes the same guard when a build is present", () => {
   for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1944", "19 L Damacana"]) assert.ok(html.includes(required), `missing public HTML term: ${required}`);
   for (const locationTerm of ["Saray Köy Sk.", "Saray Fatih", "40.058061", "32.913586", "google.com/maps"]) {
     assert.ok(html.includes(locationTerm), `missing verified location term: ${locationTerm}`);
+  }
+  for (const draftTerm of ["Mikrobiyolojik Analiz", "Kimyasal Analiz", "Fiziksel Analiz", "Gerçek analiz değildir"]) {
+    assert.ok(html.includes(draftTerm), `missing report mockup term: ${draftTerm}`);
   }
   for (const forbidden of ["[GEREKLİ BİLGİ", "fake pH", "fake mineral", "fake laboratory", "fake certificate", "info@example.com"]) {
     assert.equal(html.toLowerCase().includes(forbidden.toLowerCase()), false, `unsafe public copy found: ${forbidden}`);
@@ -96,6 +100,16 @@ test("research package and selected preview assets remain traceable", () => {
   ]) {
     assert.equal(existsSync(join(root, "public/research-preview", asset)), true, `missing selected asset: ${asset}`);
   }
+});
+
+test("licensed hero backgrounds and their source record remain available", () => {
+  for (const asset of ["dark-water-ripples.webp", "blue-water-ripples.webp"]) {
+    assert.equal(existsSync(join(root, "public/hero", asset)), true, `missing hero background: ${asset}`);
+  }
+  const sources = readFileSync(join(root, "docs/hero-image-sources.md"), "utf8");
+  assert.match(sources, /unsplash\.com\/photos\/SG6d3jYqx0U/);
+  assert.match(sources, /unsplash\.com\/photos\/5iSdv3yqqZo/);
+  assert.match(sources, /unsplash\.com\/license/);
 });
 
 test("temporary presentation mode expands review content and blocks indexing", () => {

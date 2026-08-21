@@ -87,7 +87,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .google-map-preview--wide { min-height: 22rem; margin-top: 1.25rem; }
 .google-map-preview iframe { width: 100%; height: 100%; min-height: inherit; display: block; border: 0; }
 
-.home-hero { overflow: hidden; background: var(--brand-navy); color: #fff; }
+.home-hero { overflow: hidden; background-color: var(--brand-navy); background-image: linear-gradient(90deg, rgba(7,23,44,0.97) 0%, rgba(11,31,58,0.9) 42%, rgba(11,31,58,0.55) 100%), url("/hero/dark-water-ripples.webp"); background-position: center; background-size: cover; color: #fff; }
 .home-hero__grid { min-height: clamp(35rem, calc(100svh - var(--header-height)), 48rem); display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 0.7fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }
 .home-hero__content { padding-block: clamp(4rem, 8vw, 7rem); }
 .home-hero h1 { margin-bottom: 0; font-size: clamp(4rem, 9vw, 8rem); font-weight: 750; letter-spacing: -0.065em; line-height: 0.85; }
@@ -133,6 +133,19 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .process-grid li + li { padding-left: 2rem; border-left: 1px solid var(--line-soft); }
 .process-grid h3 { margin: 3.5rem 0 0.75rem; color: var(--brand-navy); font-size: 1.35rem; }
 .process-grid p { margin: 0; color: var(--text-secondary); font-size: 0.93rem; }
+.report-showcase { background: var(--surface-cool); }
+.report-mockup-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.report-mockup { position: relative; min-height: 33rem; padding: 1.5rem; overflow: hidden; border: 1px solid var(--line-soft); background: var(--surface-paper); box-shadow: 0 1rem 2.5rem rgba(11,31,58,0.07); }
+.report-mockup::after { content: "TASLAK"; position: absolute; right: -2rem; bottom: 4.5rem; color: rgba(77,142,174,0.08); font-size: 4.5rem; font-weight: 800; letter-spacing: 0.08em; transform: rotate(-18deg); pointer-events: none; }
+.report-mockup__warning { margin: -1.5rem -1.5rem 1.5rem; padding: 0.75rem 1.5rem; background: var(--brand-navy); color: #fff; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.report-mockup__brand { margin-bottom: 3rem; color: var(--brand-water); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; }
+.report-mockup h3 { margin-bottom: 0.65rem; color: var(--brand-navy); font-size: 1.55rem; line-height: 1.05; }
+.report-mockup > p:not(.report-mockup__brand) { min-height: 4.5rem; color: var(--text-secondary); font-size: 0.86rem; }
+.report-mockup dl { margin: 1.5rem 0; border-top: 1px solid var(--line-soft); }
+.report-mockup dl div { padding-block: 0.75rem; display: grid; gap: 0.2rem; border-bottom: 1px solid var(--line-soft); }
+.report-mockup dt { color: var(--brand-navy); font-size: 0.76rem; font-weight: 750; }
+.report-mockup dd { margin: 0; color: var(--text-secondary); font-size: 0.72rem; }
+.report-mockup footer { position: absolute; right: 1.5rem; bottom: 1.5rem; left: 1.5rem; color: var(--brand-steel); font-size: 0.68rem; }
 .facility-composition { display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.35fr); gap: 1.25rem; align-items: end; }
 .facility-composition .media-slot:last-child { margin-bottom: -2.5rem; }
 .document-feature { display: grid; grid-template-columns: minmax(0, 0.65fr) minmax(18rem, 0.35fr); gap: clamp(2rem, 6vw, 5rem); align-items: stretch; }
@@ -161,7 +174,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .corporate-panel h2 { color: #fff; }
 .corporate-panel p { margin-bottom: 0; color: var(--brand-ice); }
 
-.page-intro { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--brand-navy); color: #fff; }
+.page-intro { padding-block: clamp(4.5rem, 9vw, 8rem); background-color: var(--brand-navy); background-image: linear-gradient(90deg, rgba(7,23,44,0.96) 0%, rgba(11,31,58,0.82) 58%, rgba(11,31,58,0.68) 100%), url("/hero/blue-water-ripples.webp"); background-position: center 46%; background-size: cover; color: #fff; }
 .page-intro h1 { max-width: 55rem; color: #fff; }
 .page-intro__lede { color: var(--brand-ice); }
 .page-grid { display: grid; grid-template-columns: 0.62fr 1fr; gap: clamp(2.5rem, 7vw, 7rem); align-items: start; }
@@ -236,6 +249,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   .process-grid { grid-template-columns: 1fr; }
   .process-grid li, .process-grid li + li { min-height: auto; padding: 1.75rem 0; border-left: 0; }
   .process-grid h3 { margin-top: 1.5rem; }
+  .report-mockup-grid { grid-template-columns: 1fr; }
+  .report-mockup { min-height: 30rem; }
 }
 
 @media (max-width: 640px) {
