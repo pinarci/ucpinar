@@ -96,6 +96,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .home-hero__descriptor { margin: 1rem 0 2.25rem; color: var(--brand-ice); font-family: var(--font-accent); font-size: clamp(1.55rem, 3vw, 2.4rem); font-style: italic; }
 .home-hero__lede { max-width: 32rem; margin: -1rem 0 2rem; color: #dce8ef; font-size: clamp(1rem, 1.5vw, 1.15rem); }
 .home-hero .media-slot { align-self: stretch; margin-block: clamp(2rem, 4vw, 4rem); }
+.home-hero .media-slot--hero { border-color: rgba(194, 215, 230, 0.7); background: #edf5fb; box-shadow: 0 2rem 5rem rgba(4, 17, 34, 0.32); }
+.home-hero .media-slot--hero img { object-fit: contain; }
 .brand-pillars { border-bottom: 1px solid var(--line-soft); background: var(--surface-cool); }
 .brand-pillars__grid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; }
 .brand-pillars__grid li { min-height: 12rem; padding: 2.2rem clamp(1.2rem, 3vw, 2.5rem); display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 1.25rem; border-left: 1px solid var(--line-soft); }

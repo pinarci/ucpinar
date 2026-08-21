@@ -94,10 +94,10 @@ export const researchDebugEnabled = researchPreviewEnabled && process.env.NEXT_P
 
 const productionMedia: Record<MediaKey, MediaItem> = {
   hero: {
-    src: "/research-preview/production/water-pour.jpg",
-    alt: "Bardağa dökülen suyun siyah beyaz görünümü",
+    src: "/product/ucpinar-19l-damacana.png",
+    alt: "Üçpınar logolu 19 litre damacana",
     ratio: "hero",
-    objectPosition: "50% 48%",
+    objectPosition: "50% 50%",
     representsCompanyFacility: false,
   },
   facility: {
