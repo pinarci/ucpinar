@@ -311,6 +311,7 @@ export const siteContent = {
     shortName: "ÜÇPINAR",
     legalName: authoritativeContent.company.currentLegalName,
     founded: authoritativeContent.company.foundingYear,
+    slogan: authoritativeContent.company.slogan.value,
     description: "Üçpınar Kaynak Suyu — 1943'ten bugüne, 19 L damacana ve bayi ağı odağında.",
   },
   product: {

@@ -148,7 +148,7 @@ test("licensed hero backgrounds and their source record remain available", () =>
   assert.match(sources, /unsplash\.com\/license/);
 });
 
-test("owner-provided newspaper and video archive is integrated without cropping newspaper text", () => {
+test("owner-provided archive remains available while the homepage uses a compact newspaper summary", () => {
   const homeSource = readFileSync(join(root, "src/app/page.tsx"), "utf8");
   const styles = readFileSync(join(root, "src/app/globals.css"), "utf8");
   const contentSource = readFileSync(join(root, "src/content/site-content.ts"), "utf8");
@@ -164,11 +164,22 @@ test("owner-provided newspaper and video archive is integrated without cropping 
     assert.equal(existsSync(join(root, "public", asset)), true, `missing owner-provided archive asset: ${asset}`);
   }
 
-  for (const label of ["26 Mayıs 1950", "11 Aralık 1952", "27 Aralık 1953", "Şehrin Nabzı"]) {
+  for (const label of ["26 Mayıs 1950", "11 Aralık 1952", "27 Aralık 1953"]) {
     assert.equal((contentSource + homeSource).includes(label), true, `archive label missing: ${label}`);
   }
-  assert.match(styles, /\.press-card__image img \{ object-fit: contain; \}/);
-  assert.match(homeSource, /<video controls preload="metadata" playsInline/);
+  assert.match(homeSource, /className="archive-summary"/);
+  assert.match(styles, /\.archive-summary__visual img \{ object-fit: contain; \}/);
+  assert.doesNotMatch(homeSource, /<video controls preload="metadata" playsInline/);
+});
+
+test("the owner-provided slogan is used as authoritative homepage and footer copy", () => {
+  const authoritativeSource = readFileSync(join(root, "src/content/authoritative-content.ts"), "utf8");
+  const homeSource = readFileSync(join(root, "src/app/page.tsx"), "utf8");
+  const footerSource = readFileSync(join(root, "src/components/layout/footer.tsx"), "utf8");
+
+  assert.match(authoritativeSource, /value: "Güzel ülkemin, güzel suyu"/);
+  assert.match(homeSource, /siteContent\.company\.slogan/);
+  assert.match(footerSource, /siteContent\.company\.slogan/);
 });
 
 test("research preview mode is explicit and production-safe", () => {

@@ -263,6 +263,10 @@ export const verifiedDealerNetwork: readonly VerifiedDealerRecord[] = legacyDeal
 export const authoritativeContent = {
   company: {
     brand: "Üçpınar Kaynak Suyu",
+    slogan: {
+      value: "Güzel ülkemin, güzel suyu",
+      sourceLevel: "userProvided" as const,
+    },
     currentLegalName: "ÜÇPINAR KAYNAK SUYU GIDA İNŞ. TEK. TURZ. OTO SAN. TİC. LTD. ŞTİ.",
     historicalLegalName: "ÜÇPINAR Kaynak Suyu Sanayi ve Ticaret Ltd. Şti.",
     facilityAddress: officialFacilityAddress,

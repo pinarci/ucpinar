@@ -14,6 +14,7 @@ export default function HomePage() {
   const hasResearchHistory = publicContent.heritage.length > 1;
   const contact = publicContent.contact;
   const latestReport = siteContent.reports[0];
+  const featuredArchiveRecord = publicContent.pressArchive[0];
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function HomePage() {
             <p className="eyebrow eyebrow--light">1943&apos;ten bugüne</p>
             <h1 id="hero-title">ÜÇPINAR</h1>
             <p className="home-hero__descriptor">Kaynak Suyu</p>
-            <p className="home-hero__lede">Günlük yaşamın en temel ihtiyacına köklü, sade ve güven veren bir yaklaşım.</p>
+            <p className="home-hero__lede">{siteContent.company.slogan}</p>
             <div className="action-row">
               <TextLink href="/bayiler" variant="primary">Bayi Bul</TextLink>
               <TextLink href="/kalite-ve-analizler" variant="secondary">Analizler &amp; Belgeler</TextLink>
@@ -56,7 +57,7 @@ export default function HomePage() {
 
           {hasResearchHistory ? (
             <ol className="heritage-timeline">
-              {publicContent.heritage.map((record) => (
+              {publicContent.heritage.slice(0, 3).map((record) => (
                 <li key={record.year}>
                   <time>{record.year}</time>
                   <div><h3>{record.title}</h3><p>{record.description}</p></div>
@@ -65,59 +66,31 @@ export default function HomePage() {
             </ol>
           ) : null}
 
-          {publicContent.archive.length > 0 ? (
-            <div className="archive-block" aria-labelledby="archive-home-title">
-              <div className="archive-block__heading">
-                <p className="eyebrow">Arşiv</p>
-                <h3 id="archive-home-title">Arşivden Üçpınar</h3>
-              </div>
-              <div className="archive-gallery">
-                {publicContent.archive.map((item) => (
-                  <figure key={item.src}>
-                    <div className="archive-gallery__image"><Image src={item.src} alt={item.alt} fill sizes="(max-width: 640px) 100vw, 42vw" /></div>
-                    <figcaption>{item.caption}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
           <div className="press-archive" aria-labelledby="press-archive-title">
             <div className="press-archive__intro">
               <div>
                 <p className="eyebrow">Basında Üçpınar</p>
-                <h3 id="press-archive-title">Gazete arşivinden ilanlar</h3>
+                <h3 id="press-archive-title">Arşivden kısa bir seçki</h3>
               </div>
-              <p>1950–1953 yılları arasında Ulus ve Zafer gazetelerinde yayımlanan Üçpınar ilanlarından arşiv kesitleri.</p>
+              <p>1950–1953 yılları arasında yayımlanan ilanlara tek bakışta ulaşın; tam kayıtlar belge merkezinde yer alır.</p>
             </div>
 
-            <div className="press-archive__grid">
-              {publicContent.pressArchive.map((item) => (
-                <figure className="press-card" key={item.src}>
-                  <a className="press-card__image" href={item.src} target="_blank" rel="noopener noreferrer" aria-label={`${item.publication}, ${item.date}, sayfa ${item.page} görselini tam boy aç`}>
-                    <Image src={item.src} alt={item.alt} fill sizes="(max-width: 640px) 100vw, (max-width: 920px) 50vw, 38vw" />
-                  </a>
-                  <figcaption>
-                    <span className="press-card__publication">{item.publication}</span>
-                    <span>{item.date} · Sayfa {item.page}</span>
-                    <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">Kaynak kaydı <span aria-hidden="true">↗</span></a>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-
-            <article className="archive-video">
-              <div className="archive-video__copy">
-                <p className="eyebrow eyebrow--light">Video arşivi</p>
-                <h3>Şehrin Nabzı&apos;nda Üçpınar</h3>
-                <p>Üçpınar Doğal Kaynak Suyu&apos;nun üretim alanından Show Max Şehrin Nabzı programına yansıyan arşiv görüntüsü.</p>
-                <span>Video süresi · 03:17</span>
+            <div className="archive-summary">
+              <a className="archive-summary__visual" href={featuredArchiveRecord.src} target="_blank" rel="noopener noreferrer" aria-label={`${featuredArchiveRecord.publication}, ${featuredArchiveRecord.date}, sayfa ${featuredArchiveRecord.page} görselini tam boy aç`}>
+                <Image src={featuredArchiveRecord.src} alt={featuredArchiveRecord.alt} fill sizes="(max-width: 640px) 100vw, 55vw" />
+              </a>
+              <div className="archive-summary__records">
+                <ol>
+                  {publicContent.pressArchive.map((item) => (
+                    <li key={item.src}>
+                      <div><strong>{item.publication}</strong><span>{item.date} · Sayfa {item.page}</span></div>
+                      <a href={item.src} target="_blank" rel="noopener noreferrer" aria-label={`${item.publication}, ${item.date} belgesini aç`}>Aç <span aria-hidden="true">↗</span></a>
+                    </li>
+                  ))}
+                </ol>
+                <TextLink href="/kalite-ve-analizler" variant="outline">Tüm Arşivi İncele</TextLink>
               </div>
-              <video controls preload="metadata" playsInline poster="/archive/video/ucpinar-sehrin-nabzi-poster.jpg" aria-label="Şehrin Nabzı programındaki Üçpınar Doğal Kaynak Suyu videosu">
-                <source src="/archive/video/ucpinar-sehrin-nabzi.mp4" type="video/mp4" />
-                Tarayıcınız video oynatmayı desteklemiyor.
-              </video>
-            </article>
+            </div>
           </div>
         </Container>
       </section>

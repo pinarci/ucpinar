@@ -36,6 +36,7 @@ NewInfos içinde yeni logo, ürün renderı veya temiz gazete arşivi bulunmadı
 | Field | Value | Source file | Source type | Date | Strength | Current / historical | Production use | Conflict notes |
 |---|---|---|---|---|---|---|---|---|
 | Brand | Üçpınar Kaynak Suyu | `analiz 2025-01-27.pdf` + user input | `officialDocument` + `userProvided` | 27.01.2025 | Strong | Current | Evet | Yok |
+| Slogan | Güzel ülkemin, güzel suyu | Kullanıcı girdisi | `userProvided` | 23.08.2026 | Strong | Current | Hero ve footer | Yok |
 | Current legal name | ÜÇPINAR KAYNAK SUYU GIDA İNŞ. TEK. TURZ. OTO SAN. TİC. LTD. ŞTİ. | `analiz 2025-01-27.pdf` | `officialDocument` | 27.01.2025 | Strong | Current | Footer/veri modeli | 2024 yazım farkları canonical yapılmadı |
 | Historical legal name | ÜÇPINAR Kaynak Suyu Sanayi ve Ticaret Ltd. Şti. | `SU HAKKINDA HERŞEY.docx` | `archivedCompanyWebsite` | Tarihsiz arşiv | Historical | Historical | Yalnız metadata/docs | Current unvanla birleştirilmedi |
 | Facility address | Esenboğa Yolu 16. Km., Sarayköy, Pursaklar / Ankara | 2025 raporu; 2024-06, 07, 11 raporları | `officialDocument` | 2024-2025 | Strong + corroborating | Current | Homepage, iletişim, analizler | Koordinat türetilmedi |
