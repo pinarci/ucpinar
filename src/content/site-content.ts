@@ -349,6 +349,7 @@ export function getMapSearchUrl(address: string, coordinates?: ContactData["coor
 
 export const navigation: NavigationItem[] = [
   { label: "Ana Sayfa", href: "/" },
+  { label: "Su Hakkında", href: "/su-hakkinda" },
   { label: "Kalite & Analizler", href: "/kalite-ve-analizler" },
   { label: "Bayiler", href: "/bayiler" },
   { label: "İletişim", href: "/iletisim" },

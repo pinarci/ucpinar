@@ -30,7 +30,7 @@ test("public source contains the verified 1943 founding year and no legacy ident
 });
 
 test("target route source files exist", () => {
-  for (const route of ["page.tsx", "kalite-ve-analizler/page.tsx", "bayiler/page.tsx", "iletisim/page.tsx"]) {
+  for (const route of ["page.tsx", "su-hakkinda/page.tsx", "kalite-ve-analizler/page.tsx", "bayiler/page.tsx", "iletisim/page.tsx"]) {
     assert.equal(existsSync(join(root, "src/app", route)), true, `missing route: ${route}`);
   }
   for (const removedRoute of ["about", "approach", "areas-of-work", "contact", "services"]) {
@@ -68,7 +68,7 @@ test("built public HTML passes the same guard when a build is present", () => {
   const serverApp = join(root, ".next/server/app");
   if (!existsSync(serverApp)) return;
   const htmlFiles = filesUnder(serverApp, /\.html$/);
-  assert.ok(htmlFiles.length >= 4, "expected prerendered HTML for the four public routes");
+  assert.ok(htmlFiles.length >= 5, "expected prerendered HTML for the five public routes");
   const html = htmlFiles.map((file) => readFileSync(file, "utf8")).join("\n");
   for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1943", "19 L Damacana", "27.01.2025", "2025-314-1", "Üçpınar Aktepe Bayii"]) assert.ok(html.includes(required), `missing public HTML term: ${required}`);
   for (const locationTerm of ["Esenboğa Yolu 16. Km.", "Sarayköy", "Pursaklar / Ankara", "40.058061", "32.913586", "google.com/maps"]) {
@@ -79,9 +79,29 @@ test("built public HTML passes the same guard when a build is present", () => {
   }
 
   const manifest = JSON.parse(readFileSync(join(root, ".next/server/app-paths-manifest.json"), "utf8"));
-  for (const route of ["/page", "/kalite-ve-analizler/page", "/bayiler/page", "/iletisim/page"]) {
+  for (const route of ["/page", "/su-hakkinda/page", "/kalite-ve-analizler/page", "/bayiler/page", "/iletisim/page"]) {
     assert.ok(route in manifest, `missing built route: ${route}`);
   }
+});
+
+test("requested copy is removed and dense sections use compact layouts", () => {
+  const source = filesUnder(join(root, "src"), /\.(ts|tsx|css)$/).map((file) => readFileSync(file, "utf8")).join("\n");
+  for (const removedCopy of [
+    "Resmî analiz belgelerinde yer alan tesis adresini ve harita yönlendirmesini bu sayfada bulabilirsiniz.",
+    "Bireysel ev teslimatları ağırlıklı olarak Üçpınar bayileri üzerinden yapılır.",
+    "Resmî analiz belgelerinde tesis adresi Esenboğa Yolu 16. Km., Sarayköy, Pursaklar / Ankara olarak yer alıyor.",
+  ]) assert.equal(source.includes(removedCopy), false, `removed copy remains: ${removedCopy}`);
+
+  for (const compactClass of ["section--compact", "product-compact", "analysis-list"]) assert.equal(source.includes(compactClass), true, `compact layout missing: ${compactClass}`);
+});
+
+test("the archived water questions are published as an editable sourced guide", () => {
+  const guide = readFileSync(join(root, "src/content/water-guide.ts"), "utf8");
+  const page = readFileSync(join(root, "src/app/su-hakkinda/page.tsx"), "utf8");
+  assert.equal((guide.match(/question: /g) ?? []).length, 11);
+  for (const source of ["efsa.europa.eu", "who.int", "saglik.gov.tr", "cdc.gov"]) assert.equal(guide.includes(source), true, `guide source missing: ${source}`);
+  assert.match(page, /waterGuideFaq\.map/);
+  assert.match(page, /<details/);
 });
 
 test("production build publishes official content and excludes candidate content", () => {

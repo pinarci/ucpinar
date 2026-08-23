@@ -95,9 +95,9 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="section" aria-labelledby="facility-title">
+      <section className="section section--compact" aria-labelledby="facility-title">
         <Container>
-          <SectionHeading id="facility-title" eyebrow="Tesis & kaynak" title="Üçpınar Kaynağı, Sarayköy'de." description="Resmî analiz belgelerinde tesis adresi Esenboğa Yolu 16. Km., Sarayköy, Pursaklar / Ankara olarak yer alıyor." />
+          <SectionHeading id="facility-title" eyebrow="Tesis & kaynak" title="Üçpınar Kaynağı, Sarayköy'de." />
           {publicContent.media.facility.src ? (
             <div className="facility-composition">
               <MediaSlot media={publicContent.media.facility} />
@@ -112,8 +112,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--cool" aria-labelledby="product-title">
-        <Container className="split-grid split-grid--reverse">
+      <section className="section section--compact section--cool" aria-labelledby="product-title">
+        <Container className="product-compact">
           <MediaSlot media={publicContent.media.product} />
           <div className="split-copy">
             <p className="eyebrow">Ana ürün</p>

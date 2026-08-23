@@ -37,22 +37,19 @@ export default function QualityPage() {
             <h2 id="archive-analysis-title">Altı rapor, tarih sırasıyla.</h2>
             <p className="section-heading__description">Rapor kartlarında yalnız belge üzerinde açıkça bulunan tarih, kurum, protokol, numune ve izleme noktası bilgileri yer alır.</p>
           </div>
-          <div className="report-archive-grid">
+          <ol className="analysis-list">
             {reports2024.map((report) => (
-              <article className="report-card" key={report.id}>
+              <li key={report.id}>
                 <time dateTime={report.reportDate}>{report.displayDate}</time>
-                <h3>{report.title}</h3>
-                <dl>
-                  <div><dt>Kurum</dt><dd>{report.institution}</dd></div>
-                  <div><dt>Protokol</dt><dd>{report.protocolNumber}</dd></div>
-                  <div><dt>Numune / nokta</dt><dd>{report.samplePoint}</dd></div>
-                  <div><dt>Numune tipi</dt><dd>{report.sampleType}</dd></div>
-                </dl>
-                {!report.isCompleteCapture ? <p className="report-card__scope">Arşiv kopyasında raporun ilk sayfası bulunuyor.</p> : null}
+                <div>
+                  <h3>{report.title}</h3>
+                  <p>{report.samplePoint} · Protokol {report.protocolNumber}</p>
+                  {!report.isCompleteCapture ? <span>Arşiv kopyası: ilk sayfa</span> : <span>Tam rapor</span>}
+                </div>
                 <a href={report.fileUrl} target="_blank" rel="noopener noreferrer">PDF Aç <span aria-hidden="true">↗</span></a>
-              </article>
+              </li>
             ))}
-          </div>
+          </ol>
         </Container>
       </section>
 

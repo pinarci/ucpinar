@@ -25,7 +25,7 @@ Bu belge Phase 3 içerik entegrasyonunda kullanılan kaynakların ve production 
 | `analiz_20241001.pdf` | `currentOfficial` | 01.10.2024, protokol 2024-4428-1, 19 L damacana | Belge kartı; arşivde yalnız 1/3 sayfa mevcut |
 | `ANALZ_20241105.pdf` | `currentOfficial` | 12.11.2024, protokol 2024-5157-1, tesis adresi, dolum hattı, 19 L; tam 3 sayfa | Belge kartı ve nötr metadata |
 | `analiz 2025-01-27.pdf` | `currentOfficial` | 27.01.2025, protokol 2025-314-1, Üçpınar Kaynağı, tesis adresi, güncel tüzel unvan; tam 2 sayfa | Güncel featured rapor ve current facts için canonical resmî kaynak |
-| `SU HAKKINDA HERŞEY.docx` | `historicalCompanySource`, `legacyDealerData`, `outdatedHealthInformation` | Eski site tarihçesi, tarihsel unvan, 37 bayi kaydı, eski telefonlar, SUDER/BPA metinleri | Legacy ham kayıt korunur; 23.08.2026 kullanıcı doğrulamasıyla bayi ağı current public listeye ayrıca aktarılmıştır |
+| `SU HAKKINDA HERŞEY.docx` | `historicalCompanySource`, `legacyDealerData`, `outdatedHealthInformation` | Eski site tarihçesi, 11 su rehberi soru başlığı, tarihsel unvan, 37 bayi kaydı, eski telefonlar, SUDER/BPA metinleri | Legacy ham kayıt korunur; 23.08.2026 kullanıcı doğrulamasıyla bayi ağı current public listeye ayrıca aktarılmıştır. Soru başlıkları güncel EFSA, DSÖ, Sağlık Bakanlığı ve CDC kaynaklarıyla yeniden yanıtlanmıştır |
 | `su14.jpg` | `outdatedHealthInformation` | 24.10.2008 Sağlık Bakanlığı BPA açıklaması | Public current sağlık içeriği değil |
 | `su15.jpg` | `outdatedHealthInformation` | 19.09.2011 BPA/damacana açıklaması | Public current sağlık içeriği değil |
 

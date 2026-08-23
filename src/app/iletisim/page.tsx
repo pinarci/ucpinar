@@ -22,7 +22,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageIntro eyebrow="İletişim" title="Üçpınar tesis bilgileri." description="Resmî analiz belgelerinde yer alan tesis adresini ve harita yönlendirmesini bu sayfada bulabilirsiniz." />
+      <PageIntro eyebrow="İletişim" title="Üçpınar tesis bilgileri." />
 
       {contactRows.length > 0 ? (
         <section className="section section--paper">
