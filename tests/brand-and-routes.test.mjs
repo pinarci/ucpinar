@@ -110,6 +110,12 @@ test("homepage delegates dealer search and corporate requests to their dedicated
   assert.match(home, /href="\/iletisim"/);
 });
 
+test("card surfaces use the restrained brand-tinted palette", () => {
+  const styles = readFileSync(join(root, "src/app/globals.css"), "utf8");
+  for (const token of ["--surface-card-water", "--surface-card-mist", "--surface-card-warm", "--line-card"]) assert.equal(styles.includes(token), true, `card token missing: ${token}`);
+  for (const selector of [".document-sheet", ".utility-panel", ".contact-summary", ".faq-list details"]) assert.equal(styles.includes(selector), true, `tinted card selector missing: ${selector}`);
+});
+
 test("the archived water questions are published as an editable sourced guide", () => {
   const guide = readFileSync(join(root, "src/content/water-guide.ts"), "utf8");
   const page = readFileSync(join(root, "src/app/su-hakkinda/page.tsx"), "utf8");
