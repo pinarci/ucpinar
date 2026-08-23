@@ -1,3 +1,10 @@
+import {
+  authoritativeContent,
+  officialAnalysisReports,
+  type OfficialAnalysisReport,
+  type SourceLevel,
+} from "@/content/authoritative-content";
+
 export type VerificationStatus =
   | "provided"
   | "sourceBacked"
@@ -18,14 +25,11 @@ export interface MediaItem {
   objectPosition?: string;
   previewOnly?: boolean;
   representsCompanyFacility?: boolean;
+  assetType?: "brandProductRender" | "genericPreview" | "archiveImage";
+  isPhotographicEvidence?: boolean;
 }
 
-export interface ReportItem {
-  title: string;
-  date: string | null;
-  fileUrl: string | null;
-  verificationStatus: "verified";
-}
+export type ReportItem = OfficialAnalysisReport;
 
 export interface DealerItem {
   id: string;
@@ -50,7 +54,7 @@ export interface ContactData {
     longitude: number;
   };
   sourceUrl?: string;
-  sourceStatus: "verified" | "researchCandidate" | null;
+  sourceStatus: SourceLevel | null;
 }
 
 export interface HistoricalRecord {
@@ -88,8 +92,8 @@ export const researchPreviewEnabled = resolveResearchPreview({
   flag: process.env.NEXT_PUBLIC_RESEARCH_PREVIEW,
 });
 // Temporary owner-review mode. Set to false when the approved production content is ready.
-export const presentationModeEnabled = true;
-export const expandedContentEnabled = presentationModeEnabled || researchPreviewEnabled;
+export const presentationModeEnabled = false;
+export const expandedContentEnabled = researchPreviewEnabled;
 export const researchDebugEnabled = researchPreviewEnabled && process.env.NEXT_PUBLIC_SHOW_RESEARCH_DEBUG === "true";
 
 const productionMedia: Record<MediaKey, MediaItem> = {
@@ -99,6 +103,8 @@ const productionMedia: Record<MediaKey, MediaItem> = {
     ratio: "hero",
     objectPosition: "50% 50%",
     representsCompanyFacility: false,
+    assetType: "brandProductRender",
+    isPhotographicEvidence: false,
   },
   facility: {
     src: "/research-preview/production/bottling-fill-line.jpg",
@@ -106,7 +112,10 @@ const productionMedia: Record<MediaKey, MediaItem> = {
     caption: "Temsili üretim görünümü",
     ratio: "landscape",
     objectPosition: "52% 50%",
+    previewOnly: true,
     representsCompanyFacility: false,
+    assetType: "genericPreview",
+    isPhotographicEvidence: true,
   },
   production: {
     src: "/research-preview/production/bottling-quality-check.jpg",
@@ -114,36 +123,38 @@ const productionMedia: Record<MediaKey, MediaItem> = {
     caption: "Temsili üretim görünümü",
     ratio: "portrait",
     objectPosition: "57% 50%",
+    previewOnly: true,
     representsCompanyFacility: false,
+    assetType: "genericPreview",
+    isPhotographicEvidence: true,
   },
   product: {
-    src: "/research-preview/product/generic-water-jug.jpg",
-    alt: "Dolum sırasında genel amaçlı büyük su damacanası",
-    caption: "Temsili damacana görünümü",
+    src: authoritativeContent.product.mainVisual.src,
+    alt: "Üçpınar logolu 19 litre damacana ürün görseli",
     ratio: "portrait",
-    objectPosition: "50% 56%",
+    objectPosition: "50% 50%",
     representsCompanyFacility: false,
+    assetType: "brandProductRender",
+    isPhotographicEvidence: false,
   },
   logistics: { src: null, alt: "", ratio: "wide" },
 };
 
+const publicMedia: Record<MediaKey, MediaItem> = expandedContentEnabled
+  ? productionMedia
+  : {
+      ...productionMedia,
+      facility: { src: null, alt: "", ratio: "landscape", representsCompanyFacility: false },
+      production: { src: null, alt: "", ratio: "portrait", representsCompanyFacility: false },
+    };
+
 const productionContact: ContactData = {
-  label: "Tesis konumu",
-  address: "Saray Köy Sk., Saray Fatih, 06146 Pursaklar/Ankara",
+  label: "Tesis adresi",
+  address: authoritativeContent.company.facilityAddress,
   phone: null,
   email: null,
   hours: null,
-  coordinates: {
-    latitude: 40.058061,
-    longitude: 32.913586,
-  },
-  sourceStatus: "verified",
-};
-
-const previewContact: ContactData = {
-  ...productionContact,
-  phone: "+90 312 399 34 52",
-  sourceStatus: "researchCandidate",
+  sourceStatus: "officialDocument",
 };
 
 const previewDealers: DealerItem[] = [
@@ -286,16 +297,17 @@ const pressArchive: PressArchiveItem[] = [
 
 export const siteContent = {
   company: {
-    name: "Üçpınar Kaynak Suyu",
+    name: authoritativeContent.company.brand,
     shortName: "ÜÇPINAR",
-    founded: 1944,
-    description: "Üçpınar Kaynak Suyu — 1944'ten beri, 19 L damacana ve bayi ağı odağında.",
+    legalName: authoritativeContent.company.currentLegalName,
+    founded: authoritativeContent.company.foundingYear,
+    description: "Üçpınar Kaynak Suyu — 1940'lı yıllardan bugüne, 19 L damacana ve bayi ağı odağında.",
   },
   product: {
-    name: "19 L Damacana Su",
-    description: "Üçpınar'ın ana ürünü olan 19 L damacana, bireysel teslimatlarda bayi ağı üzerinden tüketiciye ulaşıyor.",
+    name: authoritativeContent.product.name,
+    description: "Üçpınar 19 L damacana su, bayi ağı üzerinden tüketiciye ulaşıyor.",
   },
-  reports: [] as ReportItem[],
+  reports: officialAnalysisReports,
   dealers: [] as DealerItem[],
   contact: productionContact,
   media: productionMedia,
@@ -304,14 +316,14 @@ export const siteContent = {
 export const publicContent = {
   ...siteContent,
   dealers: expandedContentEnabled ? previewDealers : siteContent.dealers,
-  contact: expandedContentEnabled ? previewContact : siteContent.contact,
-  media: siteContent.media,
+  contact: siteContent.contact,
+  media: publicMedia,
   heritage: [
     {
-      year: "1944",
-      title: "Üçpınar'ın başlangıcı",
-      description: "Üçpınar'ın marka geçmişinin başlangıç yılı.",
-      verificationStatus: "provided",
+      year: "1940'lar",
+      title: "Sarayköy'de başlayan marka geçmişi",
+      description: "Üçpınar'ın eski kurumsal kayıtları markanın Sarayköy'deki geçmişini 1940'lı yıllara kadar götürüyor.",
+      verificationStatus: "sourceBacked",
     } satisfies HistoricalRecord,
     ...(expandedContentEnabled ? researchHeritage : []),
   ],
@@ -332,7 +344,7 @@ export const navigation: NavigationItem[] = [
 ];
 
 export const headerAction: NavigationItem = {
-  label: "Kurumsal Talep",
-  href: "/iletisim#kurumsal-talep",
+  label: "Tesis Bilgileri",
+  href: "/iletisim",
 };
 import { resolveResearchPreview } from "@/content/research-preview-mode.mjs";

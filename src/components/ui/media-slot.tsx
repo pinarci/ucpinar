@@ -7,12 +7,12 @@ export function MediaSlot({ media, priority = false }: { media: MediaItem; prior
   }
 
   return (
-    <figure className={`media-slot media-slot--${media.ratio}`}>
+    <figure className={`media-slot media-slot--${media.ratio}${media.assetType === "brandProductRender" ? " media-slot--brand-product-render" : ""}`}>
       <Image
         src={media.src}
         alt={media.alt}
         fill
-        priority={priority}
+        loading={priority ? "eager" : "lazy"}
         sizes="(max-width: 920px) 100vw, 60vw"
         style={{ objectPosition: media.objectPosition }}
       />

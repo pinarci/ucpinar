@@ -10,7 +10,7 @@ export function Footer() {
         <div className="site-footer__top">
           <div>
             <Link className="footer-logo-link" href="/" aria-label={`${siteContent.company.name} ana sayfa`}><BrandLogo className="footer-logo" decorative /></Link>
-            <p className="site-footer__slogan">1944&apos;ten beri. 19 L damacana ve bayi ağı odağında.</p>
+            <p className="site-footer__slogan">1940&apos;lı yıllardan bugüne. 19 L damacana ve bayi ağı odağında.</p>
           </div>
           <nav aria-label="Alt menü">
             <p className="footer-label">Bağlantılar</p>
@@ -21,7 +21,7 @@ export function Footer() {
         </div>
         <div className="site-footer__bottom">
           <p>© {new Date().getFullYear()} Üçpınar Kaynak Suyu</p>
-          <p>Tüzel bilgiler doğrulandıktan sonra eklenecektir.</p>
+          <p>{siteContent.company.legalName}</p>
         </div>
       </Container>
     </footer>

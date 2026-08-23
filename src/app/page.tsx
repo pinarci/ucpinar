@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { DealerFinder } from "@/components/dealers/dealer-finder";
 import { Container } from "@/components/ui/container";
 import { MediaSlot } from "@/components/ui/media-slot";
-import { GoogleMapPreview } from "@/components/ui/google-map-preview";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TextLink } from "@/components/ui/text-link";
 import { getMapSearchUrl, publicContent, siteContent } from "@/content/site-content";
@@ -13,13 +12,14 @@ export const metadata: Metadata = { title: { absolute: siteContent.company.name 
 export default function HomePage() {
   const hasResearchHistory = publicContent.heritage.length > 1;
   const contact = publicContent.contact;
+  const latestReport = siteContent.reports[0];
 
   return (
     <>
       <section className="home-hero" aria-labelledby="hero-title">
         <Container className="home-hero__grid">
           <div className="home-hero__content">
-            <p className="eyebrow eyebrow--light">1944&apos;ten beri</p>
+            <p className="eyebrow eyebrow--light">1940&apos;lı yıllardan bugüne</p>
             <h1 id="hero-title">ÜÇPINAR</h1>
             <p className="home-hero__descriptor">Kaynak Suyu</p>
             <p className="home-hero__lede">Günlük yaşamın en temel ihtiyacına köklü, sade ve güven veren bir yaklaşım.</p>
@@ -35,7 +35,7 @@ export default function HomePage() {
       <section className="brand-pillars" aria-label="Üçpınar marka yaklaşımı">
         <Container>
           <ul className="brand-pillars__grid">
-            <li><span>01</span><div><h2>Köklü marka</h2><p>1944&apos;ten bugüne uzanan bir isim ve Ankara&apos;yla kurulan güçlü bağ.</p></div></li>
+            <li><span>01</span><div><h2>Köklü marka</h2><p>1940&apos;lı yıllara uzanan bir isim ve Ankara&apos;yla kurulan güçlü bağ.</p></div></li>
             <li><span>02</span><div><h2>Sade yaklaşım</h2><p>Ürünü, süreci ve hizmeti gereksiz kalabalıktan uzak anlatan net bir duruş.</p></div></li>
             <li><span>03</span><div><h2>Yakın hizmet</h2><p>19 L damacana odağı ve bayi ağıyla gündelik ihtiyaca doğrudan erişim.</p></div></li>
           </ul>
@@ -45,11 +45,11 @@ export default function HomePage() {
       <section className="section section--paper" aria-labelledby="heritage-title">
         <Container>
           <div className="heritage-grid">
-            <p className="heritage-year" aria-hidden="true">1944</p>
+            <p className="heritage-year" aria-hidden="true">1940&apos;lar</p>
             <div className="heritage-copy">
               <p className="eyebrow">Marka geçmişi</p>
-              <h2 id="heritage-title">1944&apos;ten bugüne.</h2>
-              <p>Üçpınar Kaynak Suyu, 1944&apos;e uzanan marka geçmişiyle bugün 19 L damacana ve bayi ağı odağında hizmet vermektedir.</p>
+              <h2 id="heritage-title">Sarayköy&apos;den bugüne.</h2>
+              <p>Üçpınar&apos;ın eski kurumsal kayıtları markanın Sarayköy&apos;deki geçmişini 1940&apos;lı yıllara kadar götürüyor.</p>
             </div>
           </div>
 
@@ -123,11 +123,18 @@ export default function HomePage() {
 
       <section className="section" aria-labelledby="facility-title">
         <Container>
-          <SectionHeading id="facility-title" eyebrow="Tesis & üretim" title="Üretimden dağıtıma uzanan fiziksel süreç." description="Kaynak suyun tüketiciye ulaşan yolculuğu; üretim, kontrol ve dağıtım adımlarıyla ele alınır." />
-          <div className="facility-composition">
-            <MediaSlot media={publicContent.media.facility} />
-            <MediaSlot media={publicContent.media.production} />
-          </div>
+          <SectionHeading id="facility-title" eyebrow="Tesis & kaynak" title="Üçpınar Kaynağı, Sarayköy'de." description="Resmî analiz belgelerinde tesis adresi Esenboğa Yolu 16. Km., Sarayköy, Pursaklar / Ankara olarak yer alıyor." />
+          {publicContent.media.facility.src ? (
+            <div className="facility-composition">
+              <MediaSlot media={publicContent.media.facility} />
+              <MediaSlot media={publicContent.media.production} />
+            </div>
+          ) : (
+            <div className="facility-facts">
+              <div><span>Kaynak / izleme noktası</span><strong>Üçpınar Kaynağı</strong></div>
+              <div><span>Tesis adresi</span><strong>{siteContent.contact.address}</strong></div>
+            </div>
+          )}
         </Container>
       </section>
 
@@ -155,9 +162,13 @@ export default function HomePage() {
             <TextLink href="/kalite-ve-analizler" variant="outline">Analizleri İncele</TextLink>
           </div>
           <article className="document-sheet">
-            <span className="document-sheet__tag">BELGE DÜZENİ</span>
-            <h3>{hasResearchHistory ? "1950—2011 tarihsel kayıtları" : "Su analizleri"}</h3>
-            <p>{hasResearchHistory ? "Gazete arşivleri, resmî yanıt ve tarihsel kayıtlar ayrı kaynak türleriyle incelenebilir." : "Güncel analiz belgeleri yalnız doğrulanmış dosyalarıyla yayımlanır."}</p>
+            <span className="document-sheet__tag">GÜNCEL ANALİZ</span>
+            <div className="document-sheet__content">
+              <time dateTime={latestReport.reportDate}>{latestReport.displayDate}</time>
+              <h3>{latestReport.samplePoint}</h3>
+              <p>{latestReport.institution} · Protokol {latestReport.protocolNumber}</p>
+            </div>
+            <a className="text-link text-link--inline" href={latestReport.fileUrl} target="_blank" rel="noopener noreferrer">Raporu Aç <span aria-hidden="true">↗</span></a>
           </article>
         </Container>
       </section>
@@ -174,9 +185,9 @@ export default function HomePage() {
         <Container className="corporate-panel">
           <div>
             <p className="eyebrow eyebrow--light">Kurumsal talepler</p>
-            <h2 id="corporate-title">Kurumsal ve toplu su ihtiyaçları için Üçpınar merkez ile iletişime geçin.</h2>
+            <h2 id="corporate-title">Kurumsal ve toplu su ihtiyaçları için tesis bilgilerini inceleyin.</h2>
           </div>
-          {contact.phone ? <a className="text-link text-link--secondary" href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>Telefonla İletişim<span aria-hidden="true">→</span></a> : <TextLink href="/iletisim#kurumsal-talep" variant="secondary">Kurumsal İletişim</TextLink>}
+          {contact.phone ? <a className="text-link text-link--secondary" href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>Telefonla İletişim<span aria-hidden="true">→</span></a> : <TextLink href="/iletisim" variant="secondary">Tesis Bilgileri</TextLink>}
         </Container>
       </section>
 
@@ -192,7 +203,6 @@ export default function HomePage() {
                   <TextLink href="/iletisim" variant="primary">İletişim Bilgileri</TextLink>
                 </div>
               </div>
-              {contact.coordinates ? <GoogleMapPreview latitude={contact.coordinates.latitude} longitude={contact.coordinates.longitude} title="Üçpınar tesis konumu" wide /> : null}
             </>
           ) : <MediaSlot media={publicContent.media.logistics} />}
         </Container>

@@ -22,7 +22,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageIntro eyebrow="İletişim" title="Üçpınar'a ulaşın." description="Kurumsal ve toplu sipariş talepleri merkez üzerinden değerlendirilebilir. Bireysel teslimatlar için bayi ağını kullanın." />
+      <PageIntro eyebrow="İletişim" title="Üçpınar tesis bilgileri." description="Resmî analiz belgelerinde yer alan tesis adresini ve harita yönlendirmesini bu sayfada bulabilirsiniz." />
 
       {contactRows.length > 0 ? (
         <section className="section section--paper">
@@ -43,15 +43,14 @@ export default function ContactPage() {
         </section>
       ) : null}
 
-      <section className="section inquiry-panel" id="kurumsal-talep" aria-labelledby="inquiry-title">
-        <Container className="page-grid">
-          <div><p className="eyebrow eyebrow--light">Kurumsal talep</p><h2 id="inquiry-title">Kurumsal ve toplu siparişler</h2></div>
-          <div>
-            <p>Kurumsal ve toplu su ihtiyaçları için Üçpınar merkez ile iletişime geçin.</p>
-            {contact.phone ? <a className="text-link text-link--secondary" href={telephoneHref(contact.phone)}>Telefonla İletişim<span aria-hidden="true">→</span></a> : null}
-          </div>
-        </Container>
-      </section>
+      {contact.phone || contact.email ? (
+        <section className="section inquiry-panel" id="kurumsal-talep" aria-labelledby="inquiry-title">
+          <Container className="page-grid">
+            <div><p className="eyebrow eyebrow--light">Kurumsal talep</p><h2 id="inquiry-title">Kurumsal ve toplu siparişler</h2></div>
+            <div>{contact.phone ? <a className="text-link text-link--secondary" href={telephoneHref(contact.phone)}>Telefonla İletişim<span aria-hidden="true">→</span></a> : null}</div>
+          </Container>
+        </section>
+      ) : null}
     </>
   );
 }

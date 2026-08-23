@@ -14,9 +14,9 @@ function filesUnder(directory, extensionPattern) {
   });
 }
 
-test("public source contains the Üçpınar foundation and no legacy identity", () => {
+test("public source contains the neutral founding copy and no legacy identity", () => {
   const source = filesUnder(join(root, "src"), /\.(ts|tsx|css)$/).map((file) => readFileSync(file, "utf8")).join("\n");
-  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1944", "19 L Damacana"]) assert.match(source, new RegExp(required));
+  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1940", "19 L Damacana"]) assert.match(source, new RegExp(required));
   for (const heroAsset of ["/hero/dark-water-ripples.webp", "/hero/blue-water-ripples.webp"]) assert.match(source, new RegExp(heroAsset));
 
   const forbidden = [
@@ -47,7 +47,6 @@ test("owner-provided logo is integrated through the shared brand component", () 
     "src/components/layout/header.tsx",
     "src/components/layout/mobile-navigation.tsx",
     "src/components/layout/footer.tsx",
-    "src/app/kalite-ve-analizler/page.tsx",
   ]) {
     assert.match(readFileSync(join(root, consumer), "utf8"), /BrandLogo/, `shared logo missing from ${consumer}`);
   }
@@ -71,14 +70,11 @@ test("built public HTML passes the same guard when a build is present", () => {
   const htmlFiles = filesUnder(serverApp, /\.html$/);
   assert.ok(htmlFiles.length >= 4, "expected prerendered HTML for the four public routes");
   const html = htmlFiles.map((file) => readFileSync(file, "utf8")).join("\n");
-  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1944", "19 L Damacana"]) assert.ok(html.includes(required), `missing public HTML term: ${required}`);
-  for (const locationTerm of ["Saray Köy Sk.", "Saray Fatih", "40.058061", "32.913586", "google.com/maps"]) {
+  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1940", "19 L Damacana", "27.01.2025", "2025-314-1"]) assert.ok(html.includes(required), `missing public HTML term: ${required}`);
+  for (const locationTerm of ["Esenboğa Yolu 16. Km.", "Sarayköy", "Pursaklar / Ankara", "google.com/maps"]) {
     assert.ok(html.includes(locationTerm), `missing verified location term: ${locationTerm}`);
   }
-  for (const draftTerm of ["Mikrobiyolojik Analiz", "Kimyasal Analiz", "Fiziksel Analiz", "Gerçek analiz değildir"]) {
-    assert.ok(html.includes(draftTerm), `missing report mockup term: ${draftTerm}`);
-  }
-  for (const forbidden of ["[GEREKLİ BİLGİ", "fake pH", "fake mineral", "fake laboratory", "fake certificate", "info@example.com"]) {
+  for (const forbidden of ["[GEREKLİ BİLGİ", "fake pH", "fake mineral", "fake laboratory", "fake certificate", "info@example.com", "+90 312 399 34 52", "1944'ten beri", "Gerçek analiz değildir", "Bisfenol"]) {
     assert.equal(html.toLowerCase().includes(forbidden.toLowerCase()), false, `unsafe public copy found: ${forbidden}`);
   }
 
@@ -88,24 +84,35 @@ test("built public HTML passes the same guard when a build is present", () => {
   }
 });
 
-test("presentation build publishes representative media and review content", () => {
+test("production build publishes official content and excludes candidate content", () => {
   const serverApp = join(root, ".next/server/app");
   if (!existsSync(serverApp)) return;
   const html = filesUnder(serverApp, /\.html$/).map((file) => readFileSync(file, "utf8")).join("\n");
-  for (const presentationValue of [
-    "Pınarbaşı Mah.",
-    "KS.06.010",
-    "+90 312 399 34 52",
-  ]) {
-    assert.equal(html.includes(presentationValue), true, `presentation value missing from review build: ${presentationValue}`);
+  for (const officialValue of ["Üçpınar Kaynağı", "Ankara Halk Sağlığı Laboratuvarı", "19 L dolum hattı analiz raporu"]) {
+    assert.equal(html.includes(officialValue), true, `official value missing from production build: ${officialValue}`);
   }
-  for (const publicMedia of [
-    "/product/ucpinar-19l-damacana-nobackground.png",
-    "/research-preview/production/bottling-fill-line.jpg",
-    "/research-preview/product/generic-water-jug.jpg",
-  ]) {
-    assert.equal(html.includes(publicMedia), true, `representative production media missing: ${publicMedia}`);
+  for (const excludedValue of ["Pınarbaşı Mah.", "KS.06.010", "+90 312 399 34 52", "/research-preview/production/bottling-fill-line.jpg", "/research-preview/product/generic-water-jug.jpg"]) {
+    assert.equal(html.includes(excludedValue), false, `candidate value leaked into production build: ${excludedValue}`);
   }
+  assert.equal(html.includes("/product/ucpinar-19l-damacana-nobackground.png"), true);
+});
+
+test("official report copies and source safety metadata are present", () => {
+  const model = readFileSync(join(root, "src/content/authoritative-content.ts"), "utf8");
+  const publicReports = filesUnder(join(root, "public/documents/analizler"), /\.pdf$/);
+  assert.equal(publicReports.length, 7);
+  for (const token of [
+    'userProvided: 1944',
+    'archivedCompanyWebsite: 1943',
+    'resolved: null',
+    'sourceLevel: "officialDocument"',
+    'permissionReview: true',
+    'isPhotographicEvidence: false',
+  ]) assert.ok(model.includes(token), `missing source guard: ${token}`);
+  assert.match(model, /currentLegalName: "ÜÇPINAR KAYNAK SUYU GIDA İNŞ\. TEK\. TURZ\. OTO SAN\. TİC\. LTD\. ŞTİ\."/);
+  assert.match(model, /historicalLegalName: "ÜÇPINAR Kaynak Suyu Sanayi ve Ticaret Ltd\. Şti\."/);
+  assert.equal((model.match(/status: "legacyCandidate"/g) ?? []).length >= 3, true);
+  assert.equal(model.includes('status: "verified"'), false);
 });
 
 test("research package and selected preview assets remain traceable", () => {
@@ -162,15 +169,15 @@ test("owner-provided newspaper and video archive is integrated without cropping 
   assert.match(homeSource, /<video controls preload="metadata" playsInline/);
 });
 
-test("temporary presentation mode expands review content and blocks indexing", () => {
+test("research preview mode is explicit and production-safe", () => {
   const contentSource = readFileSync(join(root, "src/content/site-content.ts"), "utf8");
   const layoutSource = readFileSync(join(root, "src/app/layout.tsx"), "utf8");
   assert.match(contentSource, /process\.env\.VERCEL_ENV/);
-  assert.match(contentSource, /presentationModeEnabled = true/);
-  assert.match(contentSource, /presentationModeEnabled \|\| researchPreviewEnabled/);
+  assert.match(contentSource, /presentationModeEnabled = false/);
+  assert.match(contentSource, /expandedContentEnabled = researchPreviewEnabled/);
   assert.match(contentSource, /expandedContentEnabled \? previewDealers : siteContent\.dealers/);
-  assert.match(contentSource, /expandedContentEnabled \? previewContact : siteContent\.contact/);
-  assert.match(contentSource, /media: siteContent\.media/);
+  assert.match(contentSource, /contact: siteContent\.contact/);
+  assert.match(contentSource, /media: publicMedia/);
   assert.match(contentSource, /expandedContentEnabled \? researchHeritage : \[\]/);
   assert.match(contentSource, /expandedContentEnabled \? previewArchive/);
   assert.match(layoutSource, /index: false, follow: false, noarchive: true/);

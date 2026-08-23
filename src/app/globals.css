@@ -76,9 +76,10 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .text-link--inline { min-height: auto; padding: 0; color: var(--brand-navy); }
 .action-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
-.media-slot { position: relative; isolation: isolate; min-height: 15rem; overflow: hidden; border: 1px solid var(--line-soft); background: var(--surface-cool); color: var(--brand-navy); }
+.media-slot { position: relative; isolation: isolate; width: 100%; min-width: 0; min-height: 15rem; margin: 0; overflow: hidden; border: 1px solid var(--line-soft); background: var(--surface-cool); color: var(--brand-navy); }
 .media-slot::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, transparent 0 47%, rgba(98,128,155,0.1) 47% 47.25%, transparent 47.25% 100%); }
 .media-slot img { object-fit: cover; }
+.media-slot--brand-product-render img { object-fit: contain; padding: clamp(0.75rem, 2vw, 1.5rem); }
 .media-slot--hero { min-height: 32rem; border-color: var(--line-on-dark); background: #102a47; color: var(--brand-ice); }
 .media-slot--landscape { aspect-ratio: 16 / 10; }
 .media-slot--wide { aspect-ratio: 16 / 7; }
@@ -157,26 +158,36 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .process-grid h3 { margin: 3.5rem 0 0.75rem; color: var(--brand-navy); font-size: 1.35rem; }
 .process-grid p { margin: 0; color: var(--text-secondary); font-size: 0.93rem; }
 .report-showcase { background: var(--surface-cool); }
-.report-mockup-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
-.report-mockup { position: relative; min-height: 33rem; padding: 1.5rem; overflow: hidden; border: 1px solid var(--line-soft); background: var(--surface-paper); box-shadow: 0 1rem 2.5rem rgba(11,31,58,0.07); }
-.report-mockup::after { content: "TASLAK"; position: absolute; right: -2rem; bottom: 4.5rem; color: rgba(77,142,174,0.08); font-size: 4.5rem; font-weight: 800; letter-spacing: 0.08em; transform: rotate(-18deg); pointer-events: none; }
-.report-mockup__warning { margin: -1.5rem -1.5rem 1.5rem; padding: 0.75rem 1.5rem; background: var(--brand-navy); color: #fff; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
-.report-mockup__brand { margin-bottom: 2.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--brand-water); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-.report-mockup__brand .brand-logo { width: 5.5rem; }
-.report-mockup h3 { margin-bottom: 0.65rem; color: var(--brand-navy); font-size: 1.55rem; line-height: 1.05; }
-.report-mockup > p:not(.report-mockup__brand) { min-height: 4.5rem; color: var(--text-secondary); font-size: 0.86rem; }
-.report-mockup dl { margin: 1.5rem 0; border-top: 1px solid var(--line-soft); }
-.report-mockup dl div { padding-block: 0.75rem; display: grid; gap: 0.2rem; border-bottom: 1px solid var(--line-soft); }
-.report-mockup dt { color: var(--brand-navy); font-size: 0.76rem; font-weight: 750; }
-.report-mockup dd { margin: 0; color: var(--text-secondary); font-size: 0.72rem; }
-.report-mockup footer { position: absolute; right: 1.5rem; bottom: 1.5rem; left: 1.5rem; color: var(--brand-steel); font-size: 0.68rem; }
+.report-feature { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(19rem, 0.65fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: start; }
+.report-feature__copy h2 { margin-bottom: 1rem; color: var(--brand-navy); font-size: clamp(2.5rem, 5vw, 4.5rem); letter-spacing: -0.055em; line-height: 0.95; }
+.report-feature__copy > p:not(.eyebrow) { max-width: 37rem; color: var(--text-secondary); }
+.report-feature__status { margin: 1.5rem 0; padding: 1rem 1.2rem; border-left: 3px solid var(--brand-water); background: var(--surface-cool); color: var(--brand-navy) !important; }
+.report-feature__meta { margin: 0; border-top: 1px solid var(--line-soft); }
+.report-feature__meta div { padding-block: 1rem; display: grid; grid-template-columns: 8rem 1fr; gap: 1.5rem; border-bottom: 1px solid var(--line-soft); }
+.report-feature__meta dt, .report-card dt { color: var(--brand-steel); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.report-feature__meta dd, .report-card dd { margin: 0; color: var(--brand-navy); }
+.report-archive-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line-soft); border-left: 1px solid var(--line-soft); }
+.report-card { min-width: 0; padding: clamp(1.4rem, 3vw, 2.25rem); border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: var(--surface-paper); }
+.report-card > time, .document-sheet__content time { display: block; margin-bottom: 1.5rem; color: var(--brand-water); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; }
+.report-card h3 { min-height: 3rem; margin-bottom: 1.5rem; color: var(--brand-navy); font-size: 1.35rem; line-height: 1.15; }
+.report-card dl { margin: 0 0 1.25rem; }
+.report-card dl div { padding-block: 0.65rem; display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; border-top: 1px solid var(--line-soft); }
+.report-card dd { font-size: 0.86rem; line-height: 1.45; }
+.report-card__scope { color: var(--text-secondary); font-size: 0.78rem; }
+.report-card > a { color: var(--brand-navy); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.08em; }
 .facility-composition { display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, 0.35fr); gap: 1.25rem; align-items: end; }
 .facility-composition .media-slot:last-child { margin-bottom: -2.5rem; }
+.facility-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line-soft); border-left: 1px solid var(--line-soft); }
+.facility-facts div { min-height: 10rem; padding: clamp(1.5rem, 4vw, 2.75rem); display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+.facility-facts span { color: var(--brand-steel); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.facility-facts strong { max-width: 28rem; color: var(--brand-navy); font-size: clamp(1.15rem, 2.3vw, 1.75rem); line-height: 1.2; }
 .document-feature { display: grid; grid-template-columns: minmax(0, 0.65fr) minmax(18rem, 0.35fr); gap: clamp(2rem, 6vw, 5rem); align-items: stretch; }
 .document-sheet { min-height: 24rem; padding: clamp(1.5rem, 4vw, 3rem); display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line-soft); background: var(--surface-paper); box-shadow: var(--shadow-panel); }
 .document-sheet__tag { width: fit-content; padding: 0.4rem 0.55rem; background: var(--brand-navy); color: #fff; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; }
 .document-sheet h3 { margin: auto 0 1rem; font-size: clamp(1.65rem, 3vw, 2.5rem); line-height: 1; }
 .document-sheet p { margin-bottom: 0; color: var(--text-secondary); }
+.document-sheet__content h3 { margin: 0 0 1rem; }
+.document-sheet__content p { font-size: 0.9rem; }
 .document-sheet--quiet { box-shadow: none; }
 .utility-panel { padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line-soft); background: var(--surface-paper); box-shadow: var(--shadow-panel); }
 .field label { display: block; margin-bottom: 0.55rem; color: var(--brand-navy); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; }
@@ -276,8 +287,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   .process-grid { grid-template-columns: 1fr; }
   .process-grid li, .process-grid li + li { min-height: auto; padding: 1.75rem 0; border-left: 0; }
   .process-grid h3 { margin-top: 1.5rem; }
-  .report-mockup-grid { grid-template-columns: 1fr; }
-  .report-mockup { min-height: 30rem; }
+  .report-feature { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
@@ -306,6 +316,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   .dealer-toolbar, .dealer-result { grid-template-columns: 1fr; gap: 1rem; }
   .dealer-result__actions { justify-items: start; }
   .record-list li { grid-template-columns: 1fr; gap: 0.5rem; }
+  .report-archive-grid, .facility-facts { grid-template-columns: 1fr; }
+  .report-feature__meta div, .report-card dl div { grid-template-columns: 1fr; gap: 0.25rem; }
   .product-notes { grid-template-columns: 1fr; }
   .product-notes li + li { border-top: 1px solid var(--line-soft); }
 }
