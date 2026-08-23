@@ -45,11 +45,17 @@ test("owner-provided logo is integrated through the shared brand component", () 
   assert.match(logoComponent, /\/brand\/ucpinar-logo\.png/);
   for (const consumer of [
     "src/components/layout/header.tsx",
-    "src/components/layout/mobile-navigation.tsx",
     "src/components/layout/footer.tsx",
   ]) {
     assert.match(readFileSync(join(root, consumer), "utf8"), /BrandLogo/, `shared logo missing from ${consumer}`);
   }
+});
+
+test("mobile menu is not trapped inside the blurred sticky header", () => {
+  const styles = readFileSync(join(root, "src/app/globals.css"), "utf8");
+  const navigation = readFileSync(join(root, "src/components/layout/mobile-navigation.tsx"), "utf8");
+  assert.match(styles, /@media \(max-width: 920px\)[\s\S]*\.site-header \{ backdrop-filter: none; \}/);
+  assert.doesNotMatch(navigation, /mobile-menu__logo/);
 });
 
 test("owner-provided branded water jug is featured in the hero without cropping", () => {
