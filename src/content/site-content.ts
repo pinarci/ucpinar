@@ -1,6 +1,7 @@
 import {
   authoritativeContent,
   officialAnalysisReports,
+  verifiedDealerNetwork,
   type OfficialAnalysisReport,
   type SourceLevel,
 } from "@/content/authoritative-content";
@@ -154,8 +155,17 @@ const productionContact: ContactData = {
   phone: null,
   email: null,
   hours: null,
+  coordinates: authoritativeContent.company.facilityCoordinates,
   sourceStatus: "officialDocument",
 };
+
+const verifiedDealers: DealerItem[] = verifiedDealerNetwork.map((dealer) => ({
+  id: dealer.id,
+  name: `Üçpınar ${dealer.region} Bayii`,
+  district: dealer.region,
+  phone: dealer.phone,
+  sourceStatus: "verified",
+}));
 
 const previewDealers: DealerItem[] = [
   {
@@ -301,29 +311,29 @@ export const siteContent = {
     shortName: "ÜÇPINAR",
     legalName: authoritativeContent.company.currentLegalName,
     founded: authoritativeContent.company.foundingYear,
-    description: "Üçpınar Kaynak Suyu — 1940'lı yıllardan bugüne, 19 L damacana ve bayi ağı odağında.",
+    description: "Üçpınar Kaynak Suyu — 1943'ten bugüne, 19 L damacana ve bayi ağı odağında.",
   },
   product: {
     name: authoritativeContent.product.name,
     description: "Üçpınar 19 L damacana su, bayi ağı üzerinden tüketiciye ulaşıyor.",
   },
   reports: officialAnalysisReports,
-  dealers: [] as DealerItem[],
+  dealers: verifiedDealers,
   contact: productionContact,
   media: productionMedia,
 };
 
 export const publicContent = {
   ...siteContent,
-  dealers: expandedContentEnabled ? previewDealers : siteContent.dealers,
+  dealers: expandedContentEnabled ? [...siteContent.dealers, ...previewDealers] : siteContent.dealers,
   contact: siteContent.contact,
   media: publicMedia,
   heritage: [
     {
-      year: "1940'lar",
+      year: "1943",
       title: "Sarayköy'de başlayan marka geçmişi",
-      description: "Üçpınar'ın eski kurumsal kayıtları markanın Sarayköy'deki geçmişini 1940'lı yıllara kadar götürüyor.",
-      verificationStatus: "sourceBacked",
+      description: "Üçpınar Kaynak Suyu'nun Sarayköy'deki marka geçmişi 1943 yılında başladı.",
+      verificationStatus: "provided",
     } satisfies HistoricalRecord,
     ...(expandedContentEnabled ? researchHeritage : []),
   ],

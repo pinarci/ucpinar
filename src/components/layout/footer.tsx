@@ -10,7 +10,7 @@ export function Footer() {
         <div className="site-footer__top">
           <div>
             <Link className="footer-logo-link" href="/" aria-label={`${siteContent.company.name} ana sayfa`}><BrandLogo className="footer-logo" decorative /></Link>
-            <p className="site-footer__slogan">1940&apos;lı yıllardan bugüne. 19 L damacana ve bayi ağı odağında.</p>
+            <p className="site-footer__slogan">1943&apos;ten bugüne. 19 L damacana ve bayi ağı odağında.</p>
           </div>
           <nav aria-label="Alt menü">
             <p className="footer-label">Bağlantılar</p>

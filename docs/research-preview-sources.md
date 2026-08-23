@@ -4,7 +4,7 @@ Bu kayıt, local research preview içinde kullanılan aday içeriklerin producti
 
 | Item | Value / asset | Source | Source type | Used on | Preview only | Verification status | Production launch action |
 |---|---|---|---|---|---:|---|---|
-| Marka başlangıcı | 1944 | Kullanıcı tarafından sağlandı | Provided fact | Ana sayfa, metadata | Hayır | Provided | Marka sahibiyle son içerik onayı |
+| Marka başlangıcı | 1943 | Kullanıcı tarafından doğrulandı; eski şirket sitesiyle uyumlu | Provided fact + archived company website | Ana sayfa, metadata | Hayır | Verified | Çatışma 23.08.2026 tarihinde çözüldü |
 | Ana ürün | 19 L Damacana Su | Kullanıcı tarafından sağlandı | Provided fact | Ana sayfa, bayi sayfası | Hayır | Provided | Ürün fotoğrafı ve ambalaj onayı |
 | Dağıtım modeli | Bireysel teslimatlar bayi ağı üzerinden | Kullanıcı tarafından sağlandı | Provided fact | Ana sayfa, bayiler | Hayır | Provided | Operasyonel metin onayı |
 | 1950 kaydı | Ulus gazetesi, 26 Mayıs 1950 | [Gazete Arşivi](https://www.gastearsivi.com/gazete/ulus/1950-05-26/8) | Newspaper archive | Heritage, kalite sayfası | Evet | Source-backed historical | Kaynağı ve kullanım hakkını yeniden kontrol et |

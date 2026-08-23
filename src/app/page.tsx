@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { DealerFinder } from "@/components/dealers/dealer-finder";
 import { Container } from "@/components/ui/container";
 import { MediaSlot } from "@/components/ui/media-slot";
+import { GoogleMapPreview } from "@/components/ui/google-map-preview";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TextLink } from "@/components/ui/text-link";
 import { getMapSearchUrl, publicContent, siteContent } from "@/content/site-content";
@@ -19,7 +20,7 @@ export default function HomePage() {
       <section className="home-hero" aria-labelledby="hero-title">
         <Container className="home-hero__grid">
           <div className="home-hero__content">
-            <p className="eyebrow eyebrow--light">1940&apos;lı yıllardan bugüne</p>
+            <p className="eyebrow eyebrow--light">1943&apos;ten bugüne</p>
             <h1 id="hero-title">ÜÇPINAR</h1>
             <p className="home-hero__descriptor">Kaynak Suyu</p>
             <p className="home-hero__lede">Günlük yaşamın en temel ihtiyacına köklü, sade ve güven veren bir yaklaşım.</p>
@@ -35,7 +36,7 @@ export default function HomePage() {
       <section className="brand-pillars" aria-label="Üçpınar marka yaklaşımı">
         <Container>
           <ul className="brand-pillars__grid">
-            <li><span>01</span><div><h2>Köklü marka</h2><p>1940&apos;lı yıllara uzanan bir isim ve Ankara&apos;yla kurulan güçlü bağ.</p></div></li>
+            <li><span>01</span><div><h2>Köklü marka</h2><p>1943&apos;ten bugüne uzanan bir isim ve Ankara&apos;yla kurulan güçlü bağ.</p></div></li>
             <li><span>02</span><div><h2>Sade yaklaşım</h2><p>Ürünü, süreci ve hizmeti gereksiz kalabalıktan uzak anlatan net bir duruş.</p></div></li>
             <li><span>03</span><div><h2>Yakın hizmet</h2><p>19 L damacana odağı ve bayi ağıyla gündelik ihtiyaca doğrudan erişim.</p></div></li>
           </ul>
@@ -45,11 +46,11 @@ export default function HomePage() {
       <section className="section section--paper" aria-labelledby="heritage-title">
         <Container>
           <div className="heritage-grid">
-            <p className="heritage-year" aria-hidden="true">1940&apos;lar</p>
+            <p className="heritage-year" aria-hidden="true">1943</p>
             <div className="heritage-copy">
               <p className="eyebrow">Marka geçmişi</p>
-              <h2 id="heritage-title">Sarayköy&apos;den bugüne.</h2>
-              <p>Üçpınar&apos;ın eski kurumsal kayıtları markanın Sarayköy&apos;deki geçmişini 1940&apos;lı yıllara kadar götürüyor.</p>
+              <h2 id="heritage-title">1943&apos;ten bugüne.</h2>
+              <p>Üçpınar Kaynak Suyu&apos;nun Sarayköy&apos;deki marka geçmişi 1943 yılında başladı.</p>
             </div>
           </div>
 
@@ -203,6 +204,7 @@ export default function HomePage() {
                   <TextLink href="/iletisim" variant="primary">İletişim Bilgileri</TextLink>
                 </div>
               </div>
+              {contact.coordinates ? <GoogleMapPreview latitude={contact.coordinates.latitude} longitude={contact.coordinates.longitude} title="Üçpınar tesis konumu" wide /> : null}
             </>
           ) : <MediaSlot media={publicContent.media.logistics} />}
         </Container>

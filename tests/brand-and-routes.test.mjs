@@ -14,9 +14,9 @@ function filesUnder(directory, extensionPattern) {
   });
 }
 
-test("public source contains the neutral founding copy and no legacy identity", () => {
+test("public source contains the verified 1943 founding year and no legacy identity", () => {
   const source = filesUnder(join(root, "src"), /\.(ts|tsx|css)$/).map((file) => readFileSync(file, "utf8")).join("\n");
-  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1940", "19 L Damacana"]) assert.match(source, new RegExp(required));
+  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1943", "19 L Damacana"]) assert.match(source, new RegExp(required));
   for (const heroAsset of ["/hero/dark-water-ripples.webp", "/hero/blue-water-ripples.webp"]) assert.match(source, new RegExp(heroAsset));
 
   const forbidden = [
@@ -70,11 +70,11 @@ test("built public HTML passes the same guard when a build is present", () => {
   const htmlFiles = filesUnder(serverApp, /\.html$/);
   assert.ok(htmlFiles.length >= 4, "expected prerendered HTML for the four public routes");
   const html = htmlFiles.map((file) => readFileSync(file, "utf8")).join("\n");
-  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1940", "19 L Damacana", "27.01.2025", "2025-314-1"]) assert.ok(html.includes(required), `missing public HTML term: ${required}`);
-  for (const locationTerm of ["Esenboğa Yolu 16. Km.", "Sarayköy", "Pursaklar / Ankara", "google.com/maps"]) {
+  for (const required of ["ÜÇPINAR", "Üçpınar Kaynak Suyu", "1943", "19 L Damacana", "27.01.2025", "2025-314-1", "Üçpınar Aktepe Bayii"]) assert.ok(html.includes(required), `missing public HTML term: ${required}`);
+  for (const locationTerm of ["Esenboğa Yolu 16. Km.", "Sarayköy", "Pursaklar / Ankara", "40.058061", "32.913586", "google.com/maps"]) {
     assert.ok(html.includes(locationTerm), `missing verified location term: ${locationTerm}`);
   }
-  for (const forbidden of ["[GEREKLİ BİLGİ", "fake pH", "fake mineral", "fake laboratory", "fake certificate", "info@example.com", "+90 312 399 34 52", "1944'ten beri", "Gerçek analiz değildir", "Bisfenol"]) {
+  for (const forbidden of ["[GEREKLİ BİLGİ", "fake pH", "fake mineral", "fake laboratory", "fake certificate", "info@example.com", "+90 312 399 34 52", "1944'ten beri", "1940'lı yıllardan", "Gerçek analiz değildir", "Bisfenol"]) {
     assert.equal(html.toLowerCase().includes(forbidden.toLowerCase()), false, `unsafe public copy found: ${forbidden}`);
   }
 
@@ -102,9 +102,10 @@ test("official report copies and source safety metadata are present", () => {
   const publicReports = filesUnder(join(root, "public/documents/analizler"), /\.pdf$/);
   assert.equal(publicReports.length, 7);
   for (const token of [
-    'userProvided: 1944',
+    'previousUserProvided: 1944',
     'archivedCompanyWebsite: 1943',
-    'resolved: null',
+    'userConfirmed: 1943',
+    'resolved: 1943',
     'sourceLevel: "officialDocument"',
     'permissionReview: true',
     'isPhotographicEvidence: false',
@@ -113,12 +114,13 @@ test("official report copies and source safety metadata are present", () => {
   assert.match(model, /historicalLegalName: "ÜÇPINAR Kaynak Suyu Sanayi ve Ticaret Ltd\. Şti\."/);
   assert.equal((model.match(/status: "legacyCandidate"/g) ?? []).length >= 3, true);
   assert.equal(model.includes('status: "verified"'), false);
+  assert.match(model, /verifiedDealerNetwork:[\s\S]*legacyDealerCandidates\.map|verifiedDealerNetwork[\s\S]*legacyDealerCandidates\.map/);
 });
 
 test("research package and selected preview assets remain traceable", () => {
   const research = JSON.parse(readFileSync(join(root, "ucpinar_research_assets/research-content.json"), "utf8"));
   assert.equal(research.userProvided.publicBrandName, "Üçpınar Kaynak Suyu");
-  assert.equal(research.userProvided.foundingYear, 1944);
+  assert.equal(research.userProvided.foundingYear, 1943);
   assert.equal(research.userProvided.primaryProduct, "19 L Damacana Su");
   assert.equal(research.previewDealerCandidates.length, 5);
   for (const key of ["heritage1950", "dealerModel1953", "healthMinistry2001", "historicalLicense2011", "facilityCandidate"]) {
@@ -175,7 +177,7 @@ test("research preview mode is explicit and production-safe", () => {
   assert.match(contentSource, /process\.env\.VERCEL_ENV/);
   assert.match(contentSource, /presentationModeEnabled = false/);
   assert.match(contentSource, /expandedContentEnabled = researchPreviewEnabled/);
-  assert.match(contentSource, /expandedContentEnabled \? previewDealers : siteContent\.dealers/);
+  assert.match(contentSource, /expandedContentEnabled \? \[\.\.\.siteContent\.dealers, \.\.\.previewDealers\] : siteContent\.dealers/);
   assert.match(contentSource, /contact: siteContent\.contact/);
   assert.match(contentSource, /media: publicMedia/);
   assert.match(contentSource, /expandedContentEnabled \? researchHeritage : \[\]/);

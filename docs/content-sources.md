@@ -25,7 +25,7 @@ Bu belge Phase 3 içerik entegrasyonunda kullanılan kaynakların ve production 
 | `analiz_20241001.pdf` | `currentOfficial` | 01.10.2024, protokol 2024-4428-1, 19 L damacana | Belge kartı; arşivde yalnız 1/3 sayfa mevcut |
 | `ANALZ_20241105.pdf` | `currentOfficial` | 12.11.2024, protokol 2024-5157-1, tesis adresi, dolum hattı, 19 L; tam 3 sayfa | Belge kartı ve nötr metadata |
 | `analiz 2025-01-27.pdf` | `currentOfficial` | 27.01.2025, protokol 2025-314-1, Üçpınar Kaynağı, tesis adresi, güncel tüzel unvan; tam 2 sayfa | Güncel featured rapor ve current facts için canonical resmî kaynak |
-| `SU HAKKINDA HERŞEY.docx` | `historicalCompanySource`, `legacyDealerData`, `outdatedHealthInformation` | Eski site tarihçesi, tarihsel unvan, 37 bayi kaydı, eski telefonlar, SUDER/BPA metinleri | Yalnız kontrollü tarihçe; bayi/telefon/sağlık metinleri public current içerik değil |
+| `SU HAKKINDA HERŞEY.docx` | `historicalCompanySource`, `legacyDealerData`, `outdatedHealthInformation` | Eski site tarihçesi, tarihsel unvan, 37 bayi kaydı, eski telefonlar, SUDER/BPA metinleri | Legacy ham kayıt korunur; 23.08.2026 kullanıcı doğrulamasıyla bayi ağı current public listeye ayrıca aktarılmıştır |
 | `su14.jpg` | `outdatedHealthInformation` | 24.10.2008 Sağlık Bakanlığı BPA açıklaması | Public current sağlık içeriği değil |
 | `su15.jpg` | `outdatedHealthInformation` | 19.09.2011 BPA/damacana açıklaması | Public current sağlık içeriği değil |
 
@@ -43,9 +43,9 @@ NewInfos içinde yeni logo, ürün renderı veya temiz gazete arşivi bulunmadı
 | Product | 19 L Damacana Su; Orijinal Damacana, Etiketli, 19 L | 2024 analiz raporları | `officialDocument` | 2024 | Corroborating | Current | Homepage ürün bölümü | 2025 kaynak numunesi 1 L + 5 L PET'tir; 19 L desteği 2024 belgelerinden gelir |
 | Filling line | 15-19 L'lik dolum hattı | 2024-06, 07, 11 raporları | `officialDocument` | 2024 | Corroborating | Current | Veri modeli ve rapor kartları | Büyük marketing claim yapılmadı |
 | Distribution | Bayi ağı üzerinden tüketiciye ulaşır | Kullanıcı girdisi | `userProvided` | Phase 1 | Strong | Current | Homepage ve bayiler | Bayi kayıtlarının kendisi ayrıca doğrulanır |
-| Founding year | User: 1944; archived site: 1943; resolved: `null` | User input + `SU HAKKINDA HERŞEY.docx` | `userProvided` + `archivedCompanyWebsite` | Historical | Conflict | Unresolved | Public copy: “1940'lı yıllardan bugüne” | 1943 veya 1944 seçilmedi |
+| Founding year | 1943 | Güncel kullanıcı onayı + `SU HAKKINDA HERŞEY.docx` | `userProvided` + `archivedCompanyWebsite` | 23.08.2026 / historical | Strong | Current | Public copy: “1943'ten bugüne” | Önceki 1944 kullanıcı girdisi superseded; `resolved: 1943` |
 | Historical claims | Ankara'nın ilk / Türkiye'nin dördüncü; tam otomatik; el değmeden | `SU HAKKINDA HERŞEY.docx` | `archivedCompanyWebsite` | Historical | Historical | Historical | Yalnız metadata; homepage claim değil | Güncel teknik doğrulamaya çevrilmedi |
-| Legacy dealers | 37 bölge/telefon kaydı | `SU HAKKINDA HERŞEY.docx` | `legacyCandidate` | Historical | Restricted | Historical | Public current bayi listesine alınmadı | Bazı eski sabit hatlar alan kodsuzdur; aynen korundu |
+| Dealer network | 37 bölge/telefon kaydı | `SU HAKKINDA HERŞEY.docx` + güncel kullanıcı onayı | `legacyCandidate` ham kayıt + `userProvided` doğrulama | 23.08.2026 | Strong | Current projection | Bayiler sayfası ve homepage | Ham değerler legacy olarak korunur; current telefon görünümü Ankara sabit hatlarında 0312 alan koduyla normalize edildi |
 | Legacy contacts | Bayilik ve kurumsal bayi: 0 530 880 67 80 | `SU HAKKINDA HERŞEY.docx` | `legacyCandidate` | Historical | Restricted | Historical | Public iletişimde kullanılmadı | Güncellik doğrulanmadı |
 | Product visual | `/product/ucpinar-19l-damacana-nobackground.png` | Kullanıcı tarafından sağlanan mevcut asset | `userProvided` | Phase 2 | Strong as approved visual | Current visual | Hero ve ürün bölümü | `assetType: brandProductRender`; `isPhotographicEvidence: false` |
 
@@ -63,7 +63,8 @@ Raporlardaki açıklamalar, belgenin kısmen kullanılamayacağını, laboratuva
 
 ## Production safety
 
-- Current telefon, e-posta, çalışma saati, koordinat ve yönetici adı için resmî kaynak bulunmadı; bu alanlar `null` bırakıldı.
-- Eski bayi ve telefonlar yalnız `legacyDealerCandidates` / `legacyContactCandidates` olarak saklanır.
+- Current merkez telefonu, e-posta, çalışma saati ve yönetici adı için resmî kaynak bulunmadı; bu alanlar `null` bırakıldı.
+- Tesis koordinatları kullanıcı talebi ve onayıyla canlı harita için geri açıldı; adresin resmî belge kaynağı ayrı tutuldu.
+- Eski bayi ham kayıtları `legacyDealerCandidates` olarak korunur; kullanıcı tarafından doğrulanan ayrı `verifiedDealerNetwork` projection'ı public listede kullanılır.
 - Generic tesis görselleri `previewOnly`, `representsCompanyFacility: false` olarak kalır ve ordinary production içerikte render edilmez.
 - 2008/2011 BPA ve eski SUDER içerikleri `outdatedHealthInformation` olarak saklanır; homepage veya güncel sağlık tavsiyesi değildir.

@@ -48,7 +48,7 @@ export function MobileNavigation({ activePath }: { activePath: string }) {
               return <li key={item.href}><Link ref={index === 0 ? firstLinkRef : undefined} href={item.href} data-active={active || undefined} aria-current={active ? "page" : undefined} onClick={() => closeMenu()}><span>{String(index + 1).padStart(2, "0")}</span>{item.label}</Link></li>;
             })}</ul></nav>
             <Link className="mobile-menu__cta" href={headerAction.href} onClick={() => closeMenu()}>{headerAction.label}</Link>
-            <p className="mobile-menu__tagline">1940&apos;lı yıllardan bugüne kaynak suyu.</p>
+            <p className="mobile-menu__tagline">1943&apos;ten bugüne kaynak suyu.</p>
           </div>
         </div>
       ) : null}

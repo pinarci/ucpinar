@@ -51,6 +51,15 @@ export interface LegacyDealerCandidate {
   sourceFile: "NewInfos/SU HAKKINDA HERŞEY.docx";
 }
 
+export interface VerifiedDealerRecord {
+  id: string;
+  region: string;
+  phone: string;
+  status: "verifiedCurrent";
+  sourceLevel: "userProvided";
+  verifiedDate: "2026-08-23";
+}
+
 const officialInstitution = "Ankara Halk Sağlığı Laboratuvarı" as const;
 const officialFacilityAddress = "Esenboğa Yolu 16. Km., Sarayköy, Pursaklar / Ankara";
 
@@ -235,18 +244,40 @@ export const legacyDealerCandidates: readonly LegacyDealerCandidate[] = [
   sourceFile: "NewInfos/SU HAKKINDA HERŞEY.docx" as const,
 }));
 
+function formatVerifiedPhone(phoneAsArchived: string) {
+  const digits = phoneAsArchived.replace(/\D/g, "");
+  const nationalNumber = digits.length === 7 ? `312${digits}` : digits.startsWith("0") ? digits.slice(1) : digits;
+
+  return `+90 ${nationalNumber.slice(0, 3)} ${nationalNumber.slice(3, 6)} ${nationalNumber.slice(6, 8)} ${nationalNumber.slice(8, 10)}`;
+}
+
+export const verifiedDealerNetwork: readonly VerifiedDealerRecord[] = legacyDealerCandidates.map((dealer, index) => ({
+  id: `verified-dealer-${String(index + 1).padStart(2, "0")}`,
+  region: dealer.region,
+  phone: formatVerifiedPhone(dealer.phoneAsArchived),
+  status: "verifiedCurrent" as const,
+  sourceLevel: "userProvided" as const,
+  verifiedDate: "2026-08-23" as const,
+}));
+
 export const authoritativeContent = {
   company: {
     brand: "Üçpınar Kaynak Suyu",
     currentLegalName: "ÜÇPINAR KAYNAK SUYU GIDA İNŞ. TEK. TURZ. OTO SAN. TİC. LTD. ŞTİ.",
     historicalLegalName: "ÜÇPINAR Kaynak Suyu Sanayi ve Ticaret Ltd. Şti.",
     facilityAddress: officialFacilityAddress,
+    facilityCoordinates: {
+      latitude: 40.058061,
+      longitude: 32.913586,
+      sourceLevel: "userProvided" as const,
+    },
     sourceName: "Üçpınar Kaynağı",
     foundingYear: {
-      userProvided: 1944,
+      previousUserProvided: 1944,
       archivedCompanyWebsite: 1943,
-      resolved: null,
-      publicCopy: "1940'lı yıllardan bugüne",
+      userConfirmed: 1943,
+      resolved: 1943,
+      publicCopy: "1943'ten bugüne",
     },
   },
   product: {
@@ -283,6 +314,7 @@ export const authoritativeContent = {
   ],
   reports: officialAnalysisReports,
   legacyDealerCandidates,
+  verifiedDealerNetwork,
 } as const;
 
 export const latestOfficialReport = officialAnalysisReports[0];

@@ -2,14 +2,14 @@
   "purpose": "Local research-preview content pack for Üçpınar website. Not a production truth source.",
   "userProvided": {
     "publicBrandName": "Üçpınar Kaynak Suyu",
-    "foundingYear": 1944,
+    "foundingYear": 1943,
     "primaryProduct": "19 L Damacana Su"
   },
   "researchBacked": {
     "oldDomain": {
       "value": "ucpinar.com.tr",
       "status": "historical",
-      "note": "Third-party domain index shows the old site title as Üçpınar Doğal Kaynak Suyu and a 1944-based tagline; site was offline when checked in 2026.",
+      "note": "A third-party domain index carried a 1944-based tagline, but the archived company website and the owner's 23 August 2026 confirmation establish 1943 as the resolved founding year.",
       "source": "https://webrate.org/site/ucpinar.com.tr/"
     },
     "heritage1950": {
