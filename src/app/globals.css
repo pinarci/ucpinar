@@ -110,8 +110,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .brand-pillars__grid p { margin: 0; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; }
 .heritage-grid { display: grid; grid-template-columns: 0.62fr 1fr; gap: clamp(2rem, 7vw, 7rem); align-items: start; }
 .heritage-year { margin: 0; color: var(--brand-steel); font-family: var(--font-accent); font-size: clamp(5rem, 12vw, 10rem); font-style: italic; line-height: 0.8; }
-.heritage-copy h2, .split-copy h2, .corporate-panel h2 { margin-bottom: 1.25rem; color: var(--brand-navy); font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 650; letter-spacing: -0.05em; line-height: 1; }
-.heritage-copy p, .split-copy p, .corporate-panel p { max-width: 38rem; color: var(--text-secondary); font-size: 1.08rem; }
+.heritage-copy h2, .split-copy h2 { margin-bottom: 1.25rem; color: var(--brand-navy); font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 650; letter-spacing: -0.05em; line-height: 1; }
+.heritage-copy p, .split-copy p { max-width: 38rem; color: var(--text-secondary); font-size: 1.08rem; }
 .heritage-timeline { margin: clamp(2.25rem, 4vw, 3.5rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; border-top: 1px solid var(--line-soft); }
 .heritage-timeline li { position: relative; padding: 1.5rem 1.25rem 0 0; }
 .heritage-timeline li::before { content: ""; position: absolute; top: -0.3rem; left: 0; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--brand-water); }
@@ -194,12 +194,6 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .dealer-result__actions { display: grid; align-content: center; justify-items: end; gap: 0.45rem; font-size: 0.82rem; font-weight: 750; }
 .dealer-result__actions a:first-child { color: var(--brand-navy); }
 .dealer-result__actions a:last-child { color: var(--brand-water); }
-.section-action { margin-top: 1.5rem; }
-.corporate-section { background: var(--brand-navy-soft); color: #fff; }
-.corporate-panel { max-width: 62rem; display: grid; grid-template-columns: 1fr auto; gap: clamp(2rem, 6vw, 6rem); align-items: end; }
-.corporate-panel h2 { color: #fff; }
-.corporate-panel p { margin-bottom: 0; color: var(--brand-ice); }
-
 .page-intro { padding-block: clamp(4.5rem, 9vw, 8rem); background-color: var(--brand-navy); background-image: linear-gradient(90deg, rgba(7,23,44,0.96) 0%, rgba(11,31,58,0.82) 58%, rgba(11,31,58,0.68) 100%), url("/hero/blue-water-ripples.webp"); background-position: center 46%; background-size: cover; color: #fff; }
 .page-intro--compact { padding-block: clamp(3rem, 6vw, 5rem); }
 .page-intro h1 { max-width: 55rem; color: #fff; }
@@ -291,7 +285,6 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   .split-grid--reverse .split-copy { order: -1; }
   .product-compact .split-copy { order: -1; }
   .product-compact .media-slot { min-height: 14rem; aspect-ratio: 16 / 8; }
-  .corporate-panel { grid-template-columns: 1fr; }
   .archive-summary { grid-template-columns: 1fr; }
   .archive-summary__visual { min-height: auto; aspect-ratio: 1.54 / 1; }
   .contact-summary { grid-template-columns: 1fr; }

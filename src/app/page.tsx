@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { DealerFinder } from "@/components/dealers/dealer-finder";
 import { Container } from "@/components/ui/container";
 import { MediaSlot } from "@/components/ui/media-slot";
 import { GoogleMapPreview } from "@/components/ui/google-map-preview";
@@ -144,24 +143,6 @@ export default function HomePage() {
             </div>
             <a className="text-link text-link--inline" href={latestReport.fileUrl} target="_blank" rel="noopener noreferrer">Raporu Aç <span aria-hidden="true">↗</span></a>
           </article>
-        </Container>
-      </section>
-
-      <section className="section" aria-labelledby="dealer-title">
-        <Container>
-          <SectionHeading id="dealer-title" eyebrow="Bayi ağı" title="Bayinizi bulun." description="Bireysel ev teslimatları Üçpınar bayi ağı üzerinden gerçekleştirilir." />
-          <DealerFinder dealers={publicContent.dealers} limit={3} />
-          <div className="section-action"><TextLink href="/bayiler" variant="inline">Tüm Bayiler</TextLink></div>
-        </Container>
-      </section>
-
-      <section className="section corporate-section" aria-labelledby="corporate-title">
-        <Container className="corporate-panel">
-          <div>
-            <p className="eyebrow eyebrow--light">Kurumsal talepler</p>
-            <h2 id="corporate-title">Kurumsal ve toplu su ihtiyaçları için tesis bilgilerini inceleyin.</h2>
-          </div>
-          {contact.phone ? <a className="text-link text-link--secondary" href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}>Telefonla İletişim<span aria-hidden="true">→</span></a> : <TextLink href="/iletisim" variant="secondary">Tesis Bilgileri</TextLink>}
         </Container>
       </section>
 

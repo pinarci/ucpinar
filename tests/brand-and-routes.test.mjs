@@ -101,6 +101,15 @@ test("requested copy is removed and dense sections use compact layouts", () => {
   for (const compactClass of ["section--compact", "product-compact", "analysis-list"]) assert.equal(source.includes(compactClass), true, `compact layout missing: ${compactClass}`);
 });
 
+test("homepage delegates dealer search and corporate requests to their dedicated routes", () => {
+  const home = readFileSync(join(root, "src/app/page.tsx"), "utf8");
+  assert.doesNotMatch(home, /DealerFinder/);
+  assert.doesNotMatch(home, /corporate-section/);
+  assert.doesNotMatch(home, /Bireysel ev teslimatları Üçpınar bayi ağı üzerinden gerçekleştirilir/);
+  assert.match(home, /href="\/bayiler"/);
+  assert.match(home, /href="\/iletisim"/);
+});
+
 test("the archived water questions are published as an editable sourced guide", () => {
   const guide = readFileSync(join(root, "src/content/water-guide.ts"), "utf8");
   const page = readFileSync(join(root, "src/app/su-hakkinda/page.tsx"), "utf8");
